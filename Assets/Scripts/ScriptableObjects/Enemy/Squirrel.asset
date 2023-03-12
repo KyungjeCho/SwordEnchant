@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b540793c61a8bbf42b5c2c10686ad438, type: 3}
+  m_Name: Squirrel
+  m_EditorClassIdentifier: 
+  ID: 0
+  Name: "\uB2E4\uB78C\uC950"
+  Description: "\uC0B0 \uC18D\uC5D0 \uC0AC\uB294 \uADC0\uC5EC\uC6B4 \uB2E4\uB78C\uC950\uB294
+    \uCD5C\uADFC \uB9C8\uBB3C\uC758 \uC601\uD5A5\uC744 \uBC1B\uC544 \uD749\uD3ED\uD574\uC84C\uB2E4. "
+  MaxHp: 5
+  Damage: 1
+  LifeSteal: 0
+  DropCoin: 0
+  Speed: 1
