@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class IceMagicController : ProjectileController
+public class IceMagicController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,16 +13,6 @@ public class IceMagicController : ProjectileController
 
     // Update is called once per frame
     void Update()
-    {
-        
-    }
-
-    public override void SetTargetObject(GameObject targetObject)
-    {
-
-    }
-    
-    public override void SetTargetObject()
     {
         
     }

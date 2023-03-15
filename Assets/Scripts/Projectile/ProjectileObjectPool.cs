@@ -3,58 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class ProjectileObjectPool : MonoBehaviour
+namespace SwordEnchant.Projectile
 {
-    public int maxPoolSize = 10;
-    public int stackDefaultCapacity = 10;
-
-    public IObjectPool<ProjectileController> Pool
+    public class ProjectileObjectPool : MonoBehaviour
     {
-        get
+        #region Variables
+        public int maxPoolSize = 10;
+        public int stackDefaultCapacity = 10;
+
+        public ProjectileController prefabForObjectPool;
+
+        public IObjectPool<GameObject> Pool
         {
-            if (_pool == null)
-                _pool = new ObjectPool<ProjectileController>(
-                    CreatedPooledItem,
-                    OnTakeFromPool,
-                    OnReturnedToPool,
-                    OnDestroyPoolObject,
-                    true,
-                    stackDefaultCapacity,
-                    maxPoolSize);
-            return _pool;
+            get
+            {
+                if (_pool == null)
+                    _pool = new ObjectPool<GameObject>(
+                        CreatedPooledItem,
+                        OnTakeFromPool,
+                        OnReturnedToPool,
+                        OnDestroyPoolObject,
+                        true,
+                        stackDefaultCapacity,
+                        maxPoolSize);
+                return _pool;
+            }
         }
+
+        private IObjectPool<GameObject> _pool;
+
+        #endregion Variables
+
+        private GameObject CreatedPooledItem()
+        {
+            var go = Instantiate(prefabForObjectPool, Vector3.zero, Quaternion.identity);
+
+            go.Pool = Pool;
+
+            return go.gameObject;
+        }
+
+        private void OnReturnedToPool(GameObject projectile)
+        {
+            projectile.gameObject.SetActive(false);
+
+        }
+
+        private void OnTakeFromPool(GameObject projectile)
+        {
+            projectile.gameObject.SetActive(true);
+        }
+
+        private void OnDestroyPoolObject(GameObject projectile)
+        {
+            Destroy(projectile.gameObject);
+        }
+
+        
     }
 
-    private IObjectPool<ProjectileController> _pool;
-
-    private ProjectileController CreatedPooledItem()
-    {
-        // 게임 오브젝트 
-        var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-        ProjectileController projectile = go.AddComponent<ProjectileController>();
-
-        go.name = "Projectile";
-        projectile.Pool = Pool;
-
-        return projectile;
-    }
-
-    private void OnReturnedToPool(ProjectileController projectile)
-    {
-        projectile.gameObject.SetActive(false);
-
-    }
-
-    private void OnTakeFromPool(ProjectileController projectile)
-    {
-        projectile.gameObject.SetActive(true);
-    }
-
-    private void OnDestroyPoolObject(ProjectileController projectile)
-    {
-        Destroy(projectile.gameObject);
-    }
-
-    
 }
