@@ -34,6 +34,14 @@ namespace SwordEnchant.Projectile
 
         #endregion Variables
 
+        private void OnGUI() 
+        {
+            if (GUI.Button(new Rect(0, 0, 100, 100), "스폰"))
+            {
+                Pool.Get();
+            }    
+        }
+        #region Pool Methods
         private GameObject CreatedPooledItem()
         {
             var go = Instantiate(prefabForObjectPool, Vector3.zero, Quaternion.identity);
@@ -59,7 +67,7 @@ namespace SwordEnchant.Projectile
             Destroy(projectile.gameObject);
         }
 
-        
+        #endregion Pool Methods
     }
 
 }
