@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageable
+namespace SwordEnchant.Core
 {
-    bool IsAlive
+    public interface IDamageable
     {
-        get;
+        bool IsAlive
+        {
+            get;
+        }
+        void TakeDamage(float damage, GameObject hitEffectPrefabs, Vector3 hitPoint);
     }
-    void TakeDamage(float damage, GameObject hitEffectPrefabs, Vector3 hitPoint);
 }
+
