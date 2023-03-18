@@ -6,7 +6,7 @@ using UnityEngine;
 namespace SwordEnchant.Characters
 {
     [RequireComponent(typeof(CharacterController))]
-    public abstract class EnemyController : MonoBehaviour
+    public /*abstract*/ class EnemyController : MonoBehaviour/*, IMoveStrategy */
     {
         #region Variables
         protected StateMachine<EnemyController> stateMachine;
@@ -14,23 +14,29 @@ namespace SwordEnchant.Characters
         //protected Animator animator; 
         #endregion Variables
 
-        #region Properties
-        
-        #endregion Properties
-
         #region Unity Methods
         protected virtual void Start()
         {
             stateMachine = new StateMachine<EnemyController>(this, new IdleState());
+
+            stateMachine.AddState(new MoveState());
         }
 
         protected virtual void Update()
         {
-
+            stateMachine.Update(Time.deltaTime);
         }
         #endregion Unity Methods
 
+        #region Abstract Methods
+        //public abstract void Move();
+        #endregion Abstract Methods
         #region Helper Methods
+
+        // public R ChangeState<R>() where R : State<EnemyController>
+        // {
+        //     return stateMachine.ChangeState<R>();
+        // }
 
         #endregion Helper Methods
     }

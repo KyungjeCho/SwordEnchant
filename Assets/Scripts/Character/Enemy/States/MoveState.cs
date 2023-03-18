@@ -5,22 +5,23 @@ using SwordEnchant.Characters;
 
 namespace SwordEnchant.Core
 {
-    public class IdleState : State<EnemyController>
+    public class MoveState : State<EnemyController>
     {
         #region Variables
         private CharacterController controller;
+
+        //private IMoveStrategy moveStrategy;
         #endregion Variables
 
         #region Override Methods
         public override void OnInitialized()
         {
-            controller = context.GetComponent<CharacterController>();
+            //controller = context.GetComponent<CharacterController>();
         }
 
         public override void OnEnter()
         {
-            if (context is EnemyController_Directional)
-                stateMachine.ChangeState<MoveState>();
+            //moveStrategy = context.GetComponent<IMoveStrategy>();
         }
 
         public override void OnExit()
@@ -32,7 +33,7 @@ namespace SwordEnchant.Core
         #region Update Method   
         public override void Update(float deltaTime)
         {
-            
+            //moveStrategy?.Move();
         }
         #endregion Update Method
     }

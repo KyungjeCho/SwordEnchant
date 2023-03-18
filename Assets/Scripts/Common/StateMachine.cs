@@ -28,19 +28,13 @@ namespace SwordEnchant.Core
 
         #region Virtual Methods
         public virtual void OnInitialized()
-        {
-
-        }
+        { }
 
         public virtual void OnEnter()
-        {
-
-        }
+        { }
 
         public virtual void OnExit()
-        {
-
-        }
+        { }
         #endregion Virtual Methods
 
         #region Update Method
@@ -64,10 +58,9 @@ namespace SwordEnchant.Core
         #region Constructor
         public StateMachine(T context, State<T> initialState)
         {
-            _context = context;
+            this._context = context;
 
             AddState(initialState);
-
             _currentState = initialState;
             _currentState.OnEnter();
         }
@@ -77,17 +70,17 @@ namespace SwordEnchant.Core
         public void AddState(State<T> state)
         {
             state.SetStateMachineAndContext(this, _context);
-            states.Add(state.GetType(), state);
+            states[state.GetType()] = state;
         }
 
-        public void UpdateState(float deltaTime)
+        public void Update(float deltaTime)
         {
             _elapsedTimeInState += deltaTime;
 
             _currentState.Update(deltaTime);
         }
 
-        public R ChangeState<R>() where R : State<R>
+        public R ChangeState<R>() where R : State<T>
         {
             var newType = typeof(R);
             if (_currentState.GetType() == newType)
@@ -103,7 +96,7 @@ namespace SwordEnchant.Core
             _currentState = states[newType];
             _currentState.OnEnter();
             _elapsedTimeInState = 0.0f;
-
+            
             return _currentState as R;
         }
         #endregion StateMachine Methods
