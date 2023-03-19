@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SwordEnchant.Core;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -17,6 +18,7 @@ namespace SwordEnchant.Projectile
         [SerializeField]
         private float _timeToSelfDestruct = 10.0f;
 
+        private bool _collided = false;
         #endregion Variables
 
         #region Unity Methods
@@ -27,6 +29,22 @@ namespace SwordEnchant.Projectile
         void OnEnable() 
         {
             StartCoroutine(SelfDestruct());
+        }
+
+        protected virtual void OnTriggerEnter2D(Collider2D other) 
+        {
+            if (_collided)
+            {
+                return;
+            }    
+
+            _collided = true;
+            IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
+            Debug.Log("충돌");
+            if (damagable != null)
+            {
+                damagable.TakeDamage(1f, null, Vector2.zero);
+            }
         }
         #endregion Unity Methods
 
@@ -48,6 +66,6 @@ namespace SwordEnchant.Projectile
             Pool.Release(this.gameObject);
         }
 
-
+        
     }
 }
