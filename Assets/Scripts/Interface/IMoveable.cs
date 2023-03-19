@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SwordEnchant.Core
 {
-    public interface IMoveStrategy
+    public interface IMoveable
     {
         void Move();
     }

@@ -5,9 +5,10 @@ using UnityEngine;
 
 namespace SwordEnchant.Characters
 {
-    public class EnemyController_Tracking : EnemyController
+    public class EnemyController_OneDirctionRushing : EnemyController
     {
         #region Variables
+
         private CharacterController _controller;
         #endregion Variables
         #region Unity Methods

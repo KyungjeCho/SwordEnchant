@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SwordEnchant.Core
 {
-    public interface IDamageable
+    public interface IDamagable
     {
         bool IsAlive
         {

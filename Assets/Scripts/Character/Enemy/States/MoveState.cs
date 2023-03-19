@@ -9,19 +9,18 @@ namespace SwordEnchant.Core
     {
         #region Variables
         private CharacterController controller;
-
-        //private IMoveStrategy moveStrategy;
         #endregion Variables
 
         #region Override Methods
         public override void OnInitialized()
         {
-            //controller = context.GetComponent<CharacterController>();
+            controller = context.GetComponent<CharacterController>();
         }
 
         public override void OnEnter()
         {
-            //moveStrategy = context.GetComponent<IMoveStrategy>();
+            context.FindPlayer();
+            context.CalculateDirection();
         }
 
         public override void OnExit()
@@ -33,7 +32,7 @@ namespace SwordEnchant.Core
         #region Update Method   
         public override void Update(float deltaTime)
         {
-            //moveStrategy?.Move();
+            context.Move();
         }
         #endregion Update Method
     }

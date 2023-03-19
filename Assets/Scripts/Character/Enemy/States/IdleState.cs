@@ -31,8 +31,9 @@ namespace SwordEnchant.Core
         #region Update Method   
         public override void Update(float deltaTime)
         {
-            if (context is EnemyController_Directional)
+            if (context is EnemyController_OneDirctionRushing || context is EnemyController_PlayerTracking)
                 stateMachine.ChangeState<MoveState>();
+
         }
         #endregion Update Method
     }
