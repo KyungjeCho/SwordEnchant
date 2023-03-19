@@ -18,8 +18,6 @@ namespace SwordEnchant.Characters
         protected virtual void Start()
         {
             stateMachine = new StateMachine<EnemyController>(this, new IdleState());
-
-            stateMachine.AddState(new MoveState());
         }
 
         protected virtual void Update()

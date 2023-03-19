@@ -19,8 +19,7 @@ namespace SwordEnchant.Core
 
         public override void OnEnter()
         {
-            if (context is EnemyController_Directional)
-                stateMachine.ChangeState<MoveState>();
+            
         }
 
         public override void OnExit()
@@ -32,7 +31,8 @@ namespace SwordEnchant.Core
         #region Update Method   
         public override void Update(float deltaTime)
         {
-            
+            if (context is EnemyController_Directional)
+                stateMachine.ChangeState<MoveState>();
         }
         #endregion Update Method
     }
