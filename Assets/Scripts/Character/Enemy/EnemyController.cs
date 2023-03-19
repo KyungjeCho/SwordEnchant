@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace SwordEnchant.Characters
 {
-    [RequireComponent(typeof(CharacterController))]
     public abstract class EnemyController : MonoBehaviour, IMoveable
     {
         #region Variables
