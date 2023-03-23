@@ -14,6 +14,10 @@ namespace SwordEnchant.Characters
         #endregion Variables
 
         #region Unity Methods
+        private void Update() 
+        {
+            
+        }
         #endregion Unity Methods   
 
         #region IDamagable Interface

@@ -5,10 +5,11 @@ using UnityEngine;
 
 namespace SwordEnchant.Characters
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyController_PlayerTracking : EnemyController
     {
         #region Variables
-        private CharacterController _controller;
+        private Rigidbody2D _rigidbody2d;
         #endregion Variables
         #region Unity Methods
         protected override void Start()
@@ -17,7 +18,7 @@ namespace SwordEnchant.Characters
             
             stateMachine.AddState(new MoveState());
 
-            _controller = GetComponent<CharacterController>();            
+            _rigidbody2d = GetComponent<Rigidbody2D>();            
         }
         #endregion Unity Methods
 
@@ -25,8 +26,8 @@ namespace SwordEnchant.Characters
         public override void Move()
         {
             CalculateDirection();
-            _controller.Move(-_direction * 1 * Time.deltaTime);
-            
+            //_controller.Move(-_direction * 1 * Time.deltaTime);
+            _rigidbody2d.velocity = -_direction * 100 * Time.deltaTime;
         }
         public override void CalculateDirection()
         {

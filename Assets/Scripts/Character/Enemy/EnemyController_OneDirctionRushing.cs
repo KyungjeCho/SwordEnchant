@@ -61,8 +61,7 @@ namespace SwordEnchant.Characters
         #region Moveable Interface
         public override void Move()
         {
-            //_controller.Move(-_direction * 10 * Time.deltaTime);
-            _rigidbody2D.AddForce(-_direction * 10 * Time.deltaTime);
+            _rigidbody2D.velocity = -_direction * 100 * Time.deltaTime;
         }
         #endregion Moveable Interface
 
