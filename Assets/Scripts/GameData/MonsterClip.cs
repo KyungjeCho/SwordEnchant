@@ -10,10 +10,10 @@ public class MonsterClip
     public string monsterPath = string.Empty;
     public string monsterFullPath = string.Empty;
 
-    public int health;
+    public float health;
     public float speed;
-    public int damage;
-    public int defence;
+    public float damage;
+    public float defence;
     public float size;
 
     public MonsterClip() { }
@@ -21,5 +21,10 @@ public class MonsterClip
     public void PreLoad()
     {
         // 나중에 프리펩과 연동하기 위해
+    }
+
+    public void ReleaseMonster()
+    {
+
     }
 }
