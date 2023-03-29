@@ -22,9 +22,9 @@ public class UIGoldImage : MonoBehaviour
 
     void ChangeWidth()
     {
-        int goldDigits = DataManager.Gold.ToString().Length;
+        //int goldDigits = DataManager.Gold.ToString().Length;
 
-        goldImageRectTrans.sizeDelta 
-            = new Vector2(300 + 60 * (goldDigits - 1), 170);
+        //goldImageRectTrans.sizeDelta 
+        //    = new Vector2(300 + 60 * (goldDigits - 1), 170);
     }
 }

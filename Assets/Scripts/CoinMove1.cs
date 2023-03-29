@@ -54,7 +54,7 @@ public class CoinMove1 : MonoBehaviour
             // 골드 상승
             //PlayerStat playerStat = Player.GetComponent<PlayerStat>();
             //playerStat.Money += GoldAmount;
-            DataManager.Gold += GoldAmount;
+            //DataManager.Gold += GoldAmount;
             // 
             GameObject MoneyText = Instantiate(MoneyTextPrefab, transform.position, transform.rotation);
             MoneyText.GetComponent<MoneyText>().Reset();

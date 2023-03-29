@@ -1,3 +1,4 @@
+using SwordEnchant.Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace SwordEnchant.Data
         public ModifiableInt    damage;
         public ModifiableInt    defence;
         public ModifiableFloat  size;
+
+        public MonsterList monsterIndex;
 
         public Action<MonsterStats> OnChangedStats;
 
@@ -58,11 +61,19 @@ namespace SwordEnchant.Data
 
             isInitialized = true;
 
+            MonsterClip clip = DataManager.MonsterData().monsterClips[(int)monsterIndex];
+            
             health = new ModifiableInt(OnModifiedValue);
             speed = new ModifiableFloat(OnModifiedValue);
             damage = new ModifiableInt(OnModifiedValue);
             defence = new ModifiableInt(OnModifiedValue);
             size = new ModifiableFloat(OnModifiedValue);
+
+            health.BaseValue = (int)clip.health;
+            speed.BaseValue = clip.speed;
+            damage.BaseValue = (int)clip.damage;
+            defence.BaseValue = (int)clip.defence;
+            size.BaseValue = clip.size;
 
             Health = health.ModifiedValue;
         }
