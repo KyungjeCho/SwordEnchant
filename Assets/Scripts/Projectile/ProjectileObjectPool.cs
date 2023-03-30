@@ -38,7 +38,8 @@ namespace SwordEnchant.Projectile
         {
             if (GUI.Button(new Rect(0, 0, 100, 100), "스폰"))
             {
-                Pool.Get();
+                GameObject go = Pool.Get();
+                go.transform.position = transform.position;
             }    
         }
         #region Pool Methods
