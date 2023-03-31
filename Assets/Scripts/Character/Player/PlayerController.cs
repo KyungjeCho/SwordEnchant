@@ -11,6 +11,7 @@ namespace SwordEnchant.Characters
         #region Variables
         public float health;
         private float maxHealth = 100f;
+
         #endregion Variables
 
         #region Unity Methods
