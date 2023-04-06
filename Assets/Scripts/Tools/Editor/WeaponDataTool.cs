@@ -51,39 +51,63 @@ public class WeaponDataTool : EditorWindow
             {
                 EditorHelper.EditorToolListLayer(ref SP1, weaponData, ref selection, ref source, uiWidthLarge);
                 weaponDataSource = (GameObject)source;
-                SP2 = EditorGUILayout.BeginScrollView(this.SP2);
+
+                EditorGUILayout.BeginVertical();
                 {
-                    if (weaponData.GetDataCount() > 0)
+                    SP2 = EditorGUILayout.BeginScrollView(this.SP2);
                     {
-                        EditorGUILayout.BeginVertical();
+                        if (weaponData.GetDataCount() > 0)
                         {
-                            EditorGUILayout.Separator();
-                            EditorGUILayout.LabelField("ID", selection.ToString(), GUILayout.Width(uiWidthLarge));
-                            weaponData.names[selection] = EditorGUILayout.TextField("이름", weaponData.names[selection], GUILayout.Width(uiWidthXLarge));
-
-                            EditorGUILayout.Separator();
-
-                            if (weaponDataSource == null && weaponData.weaponClips[selection].weaponName != string.Empty)
+                            EditorGUILayout.BeginVertical();
                             {
-                                weaponData.weaponClips[selection].PreLoad();
-                                weaponDataSource = Resources.Load(weaponData.weaponClips[selection].weaponPath + weaponData.weaponClips[selection].weaponName) as GameObject;
+                                EditorGUILayout.Separator();
+                                EditorGUILayout.LabelField("ID", selection.ToString(), GUILayout.Width(uiWidthLarge));
+                                weaponData.names[selection] = EditorGUILayout.TextField("Name", weaponData.names[selection], GUILayout.Width(uiWidthXLarge));
+
+                                EditorGUILayout.Separator();
+
+                                if (weaponDataSource == null && weaponData.weaponClips[selection].weaponName != string.Empty)
+                                {
+                                    weaponData.weaponClips[selection].PreLoad();
+                                    weaponDataSource = Resources.Load(weaponData.weaponClips[selection].weaponPath + weaponData.weaponClips[selection].weaponName) as GameObject;
+                                }
+                                // 무기 프리펩
+
+                                // 무기 기본 스텟
+                                weaponData.weaponClips[selection].damage = EditorGUILayout.FloatField("Damage", weaponData.weaponClips[selection].damage, GUILayout.Width(uiWidthXLarge));
+                                weaponData.weaponClips[selection].size = EditorGUILayout.FloatField("Size", weaponData.weaponClips[selection].size, GUILayout.Width(uiWidthXLarge));
+                                weaponData.weaponClips[selection].speed = EditorGUILayout.FloatField("Speed", weaponData.weaponClips[selection].speed, GUILayout.Width(uiWidthXLarge));
+                                weaponData.weaponClips[selection].cooldown = EditorGUILayout.FloatField("Cooldown", weaponData.weaponClips[selection].cooldown, GUILayout.Width(uiWidthXLarge));
+                                weaponData.weaponClips[selection].count = EditorGUILayout.FloatField("Count", weaponData.weaponClips[selection].count, GUILayout.Width(uiWidthXLarge));
+                                weaponData.weaponClips[selection].criticalProb = EditorGUILayout.FloatField("Critical Probability", weaponData.weaponClips[selection].criticalProb, GUILayout.Width(uiWidthXLarge));
+                                weaponData.weaponClips[selection].criticalDamage = EditorGUILayout.FloatField("Critical Damage", weaponData.weaponClips[selection].criticalDamage, GUILayout.Width(uiWidthXLarge));
+                                weaponData.weaponClips[selection].rarity = (WeaponRarity)EditorGUILayout.EnumPopup("Rarity", weaponData.weaponClips[selection].rarity, GUILayout.Width(uiWidthLarge));
+                                EditorGUILayout.Separator();
+
+                                if (weaponDataSource == null && weaponData.weaponClips[selection].weaponName != string.Empty)
+                                {
+                                    weaponData.weaponClips[selection].PreLoad();
+                                    weaponDataSource = Resources.Load(weaponData.weaponClips[selection].weaponPath + weaponData.weaponClips[selection].weaponName) as GameObject;
+                                }
+                                weaponDataSource = (GameObject)EditorGUILayout.ObjectField("Projectile", weaponDataSource, typeof(GameObject), false, GUILayout.Width(uiWidthXLarge));
+                                if (weaponDataSource != null)
+                                {
+                                    weaponData.weaponClips[selection].weaponPath = EditorHelper.GetPath(weaponDataSource);
+                                    weaponData.weaponClips[selection].weaponName = weaponDataSource.name;
+                                }
+                                else
+                                {
+                                    weaponData.weaponClips[selection].weaponPath = string.Empty;
+                                    weaponData.weaponClips[selection].weaponName = string.Empty;
+                                    weaponDataSource = null;
+                                }
                             }
-                            // 몬스터 프리펩
-
-                            // 몬스터 기본 스텟
-                            weaponData.weaponClips[selection].damage = EditorGUILayout.FloatField("Damage", weaponData.weaponClips[selection].damage, GUILayout.Width(uiWidthXLarge));
-                            weaponData.weaponClips[selection].size = EditorGUILayout.FloatField("Size", weaponData.weaponClips[selection].speed, GUILayout.Width(uiWidthXLarge));
-                            weaponData.weaponClips[selection].speed = EditorGUILayout.FloatField("Speed", weaponData.weaponClips[selection].damage, GUILayout.Width(uiWidthXLarge));
-                            weaponData.weaponClips[selection].cooldown = EditorGUILayout.FloatField("Cooldown", weaponData.weaponClips[selection].cooldown, GUILayout.Width(uiWidthXLarge));
-                            weaponData.weaponClips[selection].count = EditorGUILayout.FloatField("Count", weaponData.weaponClips[selection].count, GUILayout.Width(uiWidthXLarge));
-                            weaponData.weaponClips[selection].criticalProb = EditorGUILayout.FloatField("Critical Probability", weaponData.weaponClips[selection].criticalProb, GUILayout.Width(uiWidthXLarge));
-                            weaponData.weaponClips[selection].criticalDamage = EditorGUILayout.FloatField("Critical Damage", weaponData.weaponClips[selection].criticalDamage, GUILayout.Width(uiWidthXLarge));
-
+                            EditorGUILayout.EndVertical();
                         }
-                        EditorGUILayout.EndVertical();
                     }
+                    EditorGUILayout.EndScrollView();
                 }
-                EditorGUILayout.EndScrollView();
+                EditorGUILayout.EndVertical();
             }
             EditorGUILayout.EndHorizontal();
         }

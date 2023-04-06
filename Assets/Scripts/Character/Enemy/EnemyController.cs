@@ -14,6 +14,8 @@ namespace SwordEnchant.Characters
         private Transform _target = null;
         public Transform Target => _target;
 
+        public MonsterList data;
+
         protected Vector3 _direction = Vector3.zero;
         public Vector3 Direction => _direction;
         #endregion Variables

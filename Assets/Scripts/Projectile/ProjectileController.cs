@@ -54,6 +54,17 @@ namespace SwordEnchant.Projectile
         public abstract void SetTargetObject();
         #endregion Abstract Methods
 
+        #region Virtual Methods
+        public virtual void OnEnter()
+        {
+
+        }
+
+        public virtual void OnExit()
+        {
+
+        }
+        #endregion Vritual Methods
         IEnumerator SelfDestruct()
         {
             yield return new WaitForSeconds(_timeToSelfDestruct);
