@@ -16,17 +16,17 @@ namespace SwordEnchant.Weapon
         [NonSerialized]
         public Action<WeaponInventorySlot> OnPostUpdate;
 
-        public Weapon weapon;
+        public WeaponObject weapon;
 
         public bool isEmpty;
 
-        public WeaponInventorySlot() => UpdateSlot(new Weapon(), true);
-        public WeaponInventorySlot(Weapon weapon, bool isEmpty) => UpdateSlot(weapon, isEmpty);
+        public WeaponInventorySlot() => UpdateSlot(new WeaponObject(), true);
+        public WeaponInventorySlot(WeaponObject weapon, bool isEmpty) => UpdateSlot(weapon, isEmpty);
 
-        public void RemoveWeapon() => UpdateSlot(new Weapon(), true);
+        public void RemoveWeapon() => UpdateSlot(new WeaponObject(), true);
         public void AddWeapon(bool isEmpty) => UpdateSlot(weapon, isEmpty);
 
-        public void UpdateSlot(Weapon weapon, bool isEmpty = false)
+        public void UpdateSlot(WeaponObject weapon, bool isEmpty = false)
         {
             OnPreUpdate?.Invoke(this);
 

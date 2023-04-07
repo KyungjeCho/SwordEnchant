@@ -7,7 +7,7 @@ using UnityEngine;
 namespace SwordEnchant.Weapon
 {
     [CreateAssetMenu(fileName = "New Weapon", menuName = "Data/Weapon")]
-    public class Weapon : ScriptableObject
+    public class WeaponObject : ScriptableObject
     {
         #region Variables
         public int grade = 0;

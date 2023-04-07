@@ -15,7 +15,14 @@ namespace SwordEnchant.Managers
                 weaponRoot = new GameObject("WeaponRoot").transform;
                 weaponRoot.SetParent(transform);
             }
+        } 
+
+        public GameObject GetGameObjectAtPool(int index, Vector3 position)
+        {
+
+            return null;
         }
+
     }
 
 }
