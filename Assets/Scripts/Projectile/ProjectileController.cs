@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SwordEnchant.Core;
 using UnityEngine;
 using UnityEngine.Pool;
+using SwordEnchant.Weapon;
 
 namespace SwordEnchant.Projectile
 {
@@ -11,7 +12,7 @@ namespace SwordEnchant.Projectile
     {
         #region Variables
         public IObjectPool<GameObject> Pool;
-
+        //public Weapon parent;
         protected Transform _target;
         protected Rigidbody2D _rigidbody2d;
 

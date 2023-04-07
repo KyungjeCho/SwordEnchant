@@ -9,17 +9,17 @@ namespace SwordEnchant.Data
     [CreateAssetMenu(fileName = "Monster Stats", menuName = "Stats System/Monster Stats")]
     public class MonsterStats : ScriptableObject
     {
-        public ModifiableInt    health;
+        public ModifiableFloat  health;
         public ModifiableFloat  speed;
-        public ModifiableInt    damage;
-        public ModifiableInt    defence;
+        public ModifiableFloat  damage;
+        public ModifiableFloat  defence;
         public ModifiableFloat  size;
 
         public MonsterList monsterIndex;
 
         public Action<MonsterStats> OnChangedStats;
 
-        public int Health
+        public float Health
         {
             get; set;
         }
@@ -28,8 +28,8 @@ namespace SwordEnchant.Data
         {
             get
             {
-                int _health = Health;
-                int _maxHealth = _health;
+                float _health = Health;
+                float _maxHealth = _health;
                 _maxHealth = health.ModifiedValue;
 
                 return (_maxHealth > 0 ? ((float) _health / (float)_maxHealth) : 0f);
@@ -41,7 +41,7 @@ namespace SwordEnchant.Data
             Initialize();
         }
 
-        public int AddHealth(int value)
+        public float AddHealth(int value)
         {
             Health += value;
 
@@ -63,10 +63,10 @@ namespace SwordEnchant.Data
 
             MonsterClip clip = DataManager.MonsterData().monsterClips[(int)monsterIndex];
             
-            health = new ModifiableInt(OnModifiedValue);
+            health = new ModifiableFloat(OnModifiedValue);
             speed = new ModifiableFloat(OnModifiedValue);
-            damage = new ModifiableInt(OnModifiedValue);
-            defence = new ModifiableInt(OnModifiedValue);
+            damage = new ModifiableFloat(OnModifiedValue);
+            defence = new ModifiableFloat(OnModifiedValue);
             size = new ModifiableFloat(OnModifiedValue);
 
             health.BaseValue = (int)clip.health;
