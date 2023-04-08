@@ -1,5 +1,6 @@
 using SwordEnchant.Data;
 using SwordEnchant.Managers;
+using SwordEnchant.Util;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,9 @@ namespace SwordEnchant.Weapon
         {
             stats = new WeaponStats(weaponIndex);
             clip = DataManager.WeaponData().weaponClips[(int)weaponIndex];
-            clip.PreLoad();
+
+            if (clip == null)
+                clip.PreLoad();
         }
 
         public void OnEnter()
@@ -45,6 +48,7 @@ namespace SwordEnchant.Weapon
         {
 
         }
+
         public void GenerateProjectile()
         {
             if (weaponTimer > 0.0f || weaponIndex == WeaponList.None)
@@ -52,8 +56,7 @@ namespace SwordEnchant.Weapon
 
             for(int i = 0; i < clip.count; i++)
             {
-                // Projectile 생성 (오브젝트 풀)
-                //clip.projectilePrefab;
+                Poolable poolable = PoolManager.Instance.Pop(DataManager.WeaponData().weaponClips[(int)weaponIndex].projectilePrefab);
             }
         }
     }

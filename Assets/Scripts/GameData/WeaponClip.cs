@@ -54,6 +54,20 @@ namespace SwordEnchant.Data
                 projectilePrefab = null;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// 
+        public GameObject Instantiate(Vector2 Pos)
+        {
+            if (projectilePrefab == null)
+            {
+                PreLoad();
+            }
+
+            return null;
+        }
     }
 
 }

@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using UnityObject = UnityEngine.Object;
 using SwordEnchant.Data;
+using SwordEnchant.Util;
 
 public class EditorHelper
 {
@@ -118,6 +119,33 @@ public class EditorHelper
 						{
 							source = null;
 						}
+					}
+				}
+				EditorGUILayout.EndScrollView();
+			}
+			EditorGUILayout.EndVertical();
+		}
+		EditorGUILayout.EndVertical();
+	}
+
+	public static void EditorToolListLayer(ref Vector2 ScrollPosition, Dictionary<string, Pool> pool, ref int selection, int uiWidth)
+    {
+		EditorGUILayout.BeginVertical(GUILayout.Width(uiWidth));
+		{
+			EditorGUILayout.Separator();
+			EditorGUILayout.BeginVertical("box");
+			{
+				ScrollPosition = EditorGUILayout.BeginScrollView(ScrollPosition);
+				{
+					// pool
+					if (pool.Count > 0)
+					{
+						int lastSelection = selection;
+						selection = GUILayout.SelectionGrid(selection, NameListHelper.DictionaryToNameList(pool), 1);
+						//if (lastSelection != selection)
+						//{
+						//	source = null;
+						//}
 					}
 				}
 				EditorGUILayout.EndScrollView();

@@ -6,7 +6,9 @@ namespace SwordEnchant.Weapon
 {
     public class WeaponInventory 
     {
-        
+        public WeaponInventorySlot[] slots = new WeaponInventorySlot[24];
+
+
     }
 }
 
