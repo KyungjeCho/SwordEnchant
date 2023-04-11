@@ -13,8 +13,6 @@ namespace SwordEnchant.Managers
 
         public Dictionary<string, Pool> Pool => pool;
 
-
-
         private void Awake()
         {
             Init();

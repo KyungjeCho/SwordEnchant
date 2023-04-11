@@ -10,6 +10,8 @@ namespace SwordEnchant.Weapon
     {
         [NonSerialized]
         public GameObject slotUI;
+        [NonSerialized]
+        public WeaponInventory parent;
 
         [NonSerialized]
         public Action<WeaponInventorySlot> OnPreUpdate;
