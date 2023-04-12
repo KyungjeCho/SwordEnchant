@@ -8,7 +8,7 @@ namespace SwordEnchant.Weapon
 {
     public class WeaponInventory : MonoBehaviour
     {
-        public WeaponInventorySlot[] slots = new WeaponInventorySlot[24];
+        public WeaponInventorySlot[] slots = new WeaponInventorySlot[6];
         
         private void Update()
         {
