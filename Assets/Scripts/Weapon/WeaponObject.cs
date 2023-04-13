@@ -6,24 +6,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SwordEnchant.Weapon
+namespace SwordEnchant.WeaponSystem
 {
-    //[CreateAssetMenu(fileName = "New Weapon", menuName = "Data/Weapon")]
-    public class WeaponObject //: ScriptableObject
+    [CreateAssetMenu(fileName = "New Weapon", menuName = "Data/WeaponObject")]
+    public class WeaponObject : ScriptableObject
     {
         #region Variables
-        public int grade = 0;
-        public WeaponList weaponIndex = WeaponList.None;
-        public WeaponStats stats;
-        public WeaponClip clip;
-        public Sprite icon;
-         
-        private float weaponTimer = 0.0f; // start : cooldown -> 0.0f
+        public WeaponList   weaponIndex;
+        public Sprite       icon        = null; // Weapon Slot UI Icon
 
+        private int         grade       = 0;
+        private WeaponStats stats       = null;
+        private WeaponClip  clip        = null;
+        private float       cooldownTimer = 0.0f; // start : cooldown -> 0.0f
+
+        public int          Grade       => grade;
+        public WeaponStats  Stats       => stats;
+        public WeaponClip   Clip        => clip;
+        public float        CooldownTimer => cooldownTimer;
         #endregion Variables
 
-        public void OnEnable()
+        #region OnEnable Method
+        public void OnValidate()
         {
+            if (weaponIndex == WeaponList.None)
+                return;
+            // WeaponList를 이용하여 Stats과 Clip 등록
+            stats   = new WeaponStats(weaponIndex);
+            clip    = DataManager.WeaponData().weaponClips[(int)weaponIndex];
+
+            // Clip 에 있는 투사체 프리펩 PoolManager에 등록
+            clip.PreLoad();
+
+
             //if (weaponIndex == WeaponList.None)
             //    return;
 
@@ -32,19 +47,30 @@ namespace SwordEnchant.Weapon
 
             //if (clip == null)
             //    clip.PreLoad();
+            
         }
 
+        public void RegisterPool()
+        {
+            if (clip.projectilePrefab == null || PoolManager.Instance == null)
+                return;
+
+            if (PoolManager.Instance.isContain(clip.projectilePrefab) == false)
+                PoolManager.Instance.CreatePool(clip.projectilePrefab);
+
+        }
+        #endregion OnEnable Method
         public void OnEnter()
         {
-            weaponTimer = clip.cooldown;
+            cooldownTimer = clip.cooldown;
         }
         public void UpdateTimer(float deltaTime)
         {
-            weaponTimer -= deltaTime;
-            if (weaponTimer <= 0.0f)
+            cooldownTimer -= deltaTime;
+            if (cooldownTimer <= 0.0f)
             {
                 GenerateProjectile();
-                weaponTimer = clip.cooldown;
+                cooldownTimer = clip.cooldown;
             }
         }
 
@@ -55,7 +81,7 @@ namespace SwordEnchant.Weapon
 
         public void GenerateProjectile()
         {
-            if (weaponTimer > 0.0f || weaponIndex == WeaponList.None)
+            if (cooldownTimer > 0.0f || weaponIndex == WeaponList.None)
                 return;
 
             for(int i = 0; i < clip.count; i++)
@@ -63,8 +89,5 @@ namespace SwordEnchant.Weapon
                 //Poolable poolable = PoolManager.Instance.Pop(DataManager.WeaponData().weaponClips[(int)weaponIndex].projectilePrefab);
             }
         }
-
-        
     }
-
 }

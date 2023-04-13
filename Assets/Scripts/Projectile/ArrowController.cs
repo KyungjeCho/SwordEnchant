@@ -37,7 +37,7 @@ namespace SwordEnchant.Projectile
                 Vector2 direction = (target.position - transform.position).normalized;
                 float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
-                myRigidbody2D.AddForce(direction * parent.stats.speed.ModifiedValue);
+                myRigidbody2D.AddForce(direction * parent.Stats.speed.ModifiedValue);
             }
             else
             {

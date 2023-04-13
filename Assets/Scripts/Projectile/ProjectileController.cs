@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SwordEnchant.Core;
 using UnityEngine;
-using SwordEnchant.Weapon;
+using SwordEnchant.WeaponSystem;
 
 namespace SwordEnchant.Projectile
 {

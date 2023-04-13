@@ -1,4 +1,4 @@
-using SwordEnchant.Weapon;
+using SwordEnchant.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

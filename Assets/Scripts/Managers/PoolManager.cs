@@ -58,6 +58,15 @@ namespace SwordEnchant.Managers
             return pool[original.name].Pop(parent);
         }
 
+        public bool isContain(GameObject original)
+        {
+            return pool.ContainsKey(original.name);
+        }
+        public bool isContain(string originalName)
+        {
+            return pool.ContainsKey(originalName);
+        }
+
         public GameObject GetOriginal(string name)
         {
             if (pool.ContainsKey(name) == false)

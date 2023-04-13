@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SwordEnchant.Weapon
+namespace SwordEnchant.WeaponSystem
 {
     public enum WeaponAttribute
     {

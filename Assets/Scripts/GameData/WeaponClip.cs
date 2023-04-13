@@ -1,4 +1,5 @@
 using SwordEnchant.Core;
+using SwordEnchant.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,6 +45,9 @@ namespace SwordEnchant.Data
             if (weaponFullPath != string.Empty && projectilePrefab == null)
             {
                 projectilePrefab = ResourceManager.Load(weaponFullPath) as GameObject;
+
+                //if (PoolManager.Instance.isContain(projectilePrefab) == false)
+                //    PoolManager.Instance.CreatePool(projectilePrefab);
             }
         }
 

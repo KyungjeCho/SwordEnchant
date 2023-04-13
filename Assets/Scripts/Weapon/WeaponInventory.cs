@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace SwordEnchant.Weapon
+namespace SwordEnchant.WeaponSystem
 {
     public class WeaponInventory : MonoBehaviour
     {
@@ -31,26 +31,26 @@ namespace SwordEnchant.Weapon
                 return false;
             }
             slots[GetFullSlotCount()].weapon = weapon;
-            slots[GetFullSlotCount()].AddWeapon(false);
+            //slots[GetFullSlotCount()].AddWeapon(false);
 
             return true;
         }
 
         public WeaponInventorySlot FindWeaponInInventory(WeaponObject weapon)
         {
-            return slots.FirstOrDefault(i => i.weapon.clip.weaponName == weapon.clip.weaponName);
+            return slots.FirstOrDefault(i => i.weapon.Clip.weaponName == weapon.Clip.weaponName);
         }
         public void Clear()
         {
             foreach(WeaponInventorySlot slot in slots)
             {
-                slot.UpdateSlot(new WeaponObject(), false);
+                //slot.UpdateSlot(new WeaponObject(), false);
             }
         }
 
         public bool IsContain(WeaponObject weaponObject)
         {
-            return Array.Find(slots, i => i.weapon.clip.realID == weaponObject.clip.realID) != null;
+            return Array.Find(slots, i => i.weapon.Clip.realID == weaponObject.Clip.realID) != null;
         }
 
         public int GetFullSlotCount()
