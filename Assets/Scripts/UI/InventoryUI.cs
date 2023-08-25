@@ -26,19 +26,19 @@ namespace SwordEnchant.UI
         {
             CreateSlots();
 
-            for (int i = 0; i < inventoryObject.Slots.Length; i++)
-            {
-                inventoryObject.Slots[i].parent         = inventoryObject;
-                inventoryObject.Slots[i].OnPostUpdate   += OnPostUpdate;
-            }
+            //for (int i = 0; i < inventoryObject.Slots.Length; i++)
+            //{
+            //    inventoryObject.Slots[i].parent         = inventoryObject;
+            //    inventoryObject.Slots[i].OnPostUpdate   += OnPostUpdate;
+            //}
         }
 
         protected virtual void Start()
         {
-            for (int i = 0; i < inventoryObject.Slots.Length; i++)
-            {
-                inventoryObject.Slots[i].UpdateSlot(inventoryObject.Slots[i].weaponIndex, inventoryObject.Slots[i].amount);
-            }
+            //for (int i = 0; i < inventoryObject.Slots.Length; i++)
+            //{
+            //    inventoryObject.Slots[i].UpdateSlot(inventoryObject.Slots[i].weaponIndex, inventoryObject.Slots[i].amount);
+            //}
         }
         #endregion Unity Methods
 
