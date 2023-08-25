@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum BattleEventType 
 {
-    COUNTDOWN, START, RESTART, PAUSE, DIE, QUIT
+    COUNTDOWN, START, RESTART, PAUSE, DIE, QUIT, FINISH
 }

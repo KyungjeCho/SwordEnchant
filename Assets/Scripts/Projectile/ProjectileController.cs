@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using SwordEnchant.Core;
 using UnityEngine;
-using UnityEngine.Pool;
+using SwordEnchant.WeaponSystem;
+using SwordEnchant.Managers;
 
 namespace SwordEnchant.Projectile
 {
@@ -9,24 +11,46 @@ namespace SwordEnchant.Projectile
     public abstract class ProjectileController : MonoBehaviour
     {
         #region Variables
-        public IObjectPool<GameObject> Pool;
+        public WeaponObject parent = null;
 
-        protected Transform _target;
-        protected Rigidbody2D _rigidbody2d;
+        protected Transform target;
+        protected Rigidbody2D myRigidbody2D;
 
         [SerializeField]
-        private float _timeToSelfDestruct = 10.0f;
+        protected float timeToSelfDestruct = 10.0f;
 
+        protected bool collided = false;
         #endregion Variables
 
         #region Unity Methods
-        void Awake()
+        void Start()
         {
-            _rigidbody2d = GetComponent<Rigidbody2D>();
+            myRigidbody2D = GetComponent<Rigidbody2D>();
         }
+
         void OnEnable() 
         {
-            StartCoroutine(SelfDestruct());
+            myRigidbody2D = GetComponent<Rigidbody2D>();
+            transform.localScale = Vector3.one * parent.Stats.size.ModifiedValue;
+        }
+
+        protected virtual void OnTriggerEnter2D(Collider2D other) 
+        {
+            if (other.tag == "Enemy")
+            {
+                if (collided)
+                {
+                    return;
+                }
+
+                IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
+                if (damagable != null)
+                {
+                    damagable.TakeDamage(parent.Stats.damage.ModifiedValue, parent.Stats.criticalDamage.ModifiedValue, parent.Stats.criticalProb.ModifiedValue,  DataManager.EffectData().GetClip((int)EffectList.Hit_1).effectPrefab, other.ClosestPoint(transform.position));
+                    
+                }
+            }
+            
         }
         #endregion Unity Methods
 
@@ -36,18 +60,18 @@ namespace SwordEnchant.Projectile
         public abstract void SetTargetObject();
         #endregion Abstract Methods
 
-        IEnumerator SelfDestruct()
+        #region Virtual Methods
+        public virtual void OnEnter()
         {
-            yield return new WaitForSeconds(_timeToSelfDestruct);
-
-            ReturnToPool();
+            transform.localScale = Vector3.one * parent.Stats.size.ModifiedValue;
         }
 
-        private void ReturnToPool()
+        public virtual void OnExit()
         {
-            Pool.Release(this.gameObject);
+
         }
-
-
+        #endregion Vritual Methods
+        
+        
     }
 }

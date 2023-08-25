@@ -3,44 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BattleEventBus 
+namespace SwordEnchant.EventBus
 {
-    private static readonly IDictionary<BattleEventType, UnityEvent>
-    Events = new Dictionary<BattleEventType, UnityEvent>();
-
-    public static void Subscribe(BattleEventType eventType, UnityAction listener) 
+    public class BattleEventBus
     {
-        UnityEvent thisEvent;
+        private static readonly IDictionary<BattleEventType, UnityEvent>
+        Events = new Dictionary<BattleEventType, UnityEvent>();
 
-        if (Events.TryGetValue(eventType, out thisEvent))
+        public static void Subscribe(BattleEventType eventType, UnityAction listener)
         {
-            thisEvent.AddListener(listener);
+            UnityEvent thisEvent;
+
+            if (Events.TryGetValue(eventType, out thisEvent))
+            {
+                thisEvent.AddListener(listener);
+            }
+            else
+            {
+                thisEvent = new UnityEvent();
+                thisEvent.AddListener(listener);
+                Events.Add(eventType, thisEvent);
+            }
         }
-        else
+
+        public static void Unsubscribe(BattleEventType type, UnityAction listener)
         {
-            thisEvent = new UnityEvent();
-            thisEvent.AddListener(listener);
-            Events.Add(eventType, thisEvent);
+            UnityEvent thisEvent;
+
+            if (Events.TryGetValue(type, out thisEvent))
+            {
+                thisEvent.RemoveListener(listener);
+            }
         }
-    }
 
-    public static void Unsubscribe(BattleEventType type, UnityAction listener)
-    {
-        UnityEvent thisEvent;
-
-        if (Events.TryGetValue(type, out thisEvent))
+        public static void Publish(BattleEventType type)
         {
-            thisEvent.RemoveListener(listener);
-        }
-    }
+            UnityEvent thisEvent;
 
-    public static void Publish(BattleEventType type)
-    {
-        UnityEvent thisEvent;
-
-        if (Events.TryGetValue(type, out thisEvent)) 
-        {
-            thisEvent.Invoke();
+            if (Events.TryGetValue(type, out thisEvent))
+            {
+                thisEvent.Invoke();
+            }
         }
     }
 }
+
