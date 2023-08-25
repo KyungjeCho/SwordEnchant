@@ -9,5 +9,6 @@ public enum EffectList
        Hit_1 =   0,
        Hit_2 =   1,
        Hit_3 =   2,
+       HitEffect =   3,
 
 }

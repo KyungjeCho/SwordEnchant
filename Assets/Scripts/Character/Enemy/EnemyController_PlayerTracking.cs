@@ -103,7 +103,7 @@ namespace SwordEnchant.Characters
             
             stateMachine.ChangeState<KnockbackState>();
 
-            EffectManager.Instance.EffectOneShot((int)EffectList.Hit_1, hitPoint);
+            EffectManager.Instance.EffectOneShot((int)EffectList.HitEffect, hitPoint);
 
             damageFlash.CallDamageFlash();
         }
