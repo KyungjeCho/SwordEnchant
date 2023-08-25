@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b413f8fa645ad747866653706a6ce7c, type: 3}
-  m_Name: Shield
+  m_Name: MasterSword
   m_EditorClassIdentifier: 
   weaponIndex: 0
-  icon: {fileID: 21300000, guid: 7e504087ec3b3c146af58ac77c2ae19b, type: 3}
+  icon: {fileID: 0}
   slotUI: {fileID: 0}
   stats:
     damage:
-      baseValue: 5
-      modifiedValue: 5
+      baseValue: 0
+      modifiedValue: 0
     speed:
-      baseValue: 500
-      modifiedValue: 500
+      baseValue: 0
+      modifiedValue: 0
     size:
-      baseValue: 1
-      modifiedValue: 1
+      baseValue: 0
+      modifiedValue: 0
     cooldown:
-      baseValue: 4
-      modifiedValue: 4
+      baseValue: 0
+      modifiedValue: 0
     count:
-      baseValue: 1
-      modifiedValue: 1
+      baseValue: 0
+      modifiedValue: 0
     criticalDamage:
       baseValue: 0
       modifiedValue: 0

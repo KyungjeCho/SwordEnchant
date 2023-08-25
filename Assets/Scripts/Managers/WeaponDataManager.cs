@@ -43,7 +43,7 @@ namespace SwordEnchant.Managers
         }
         #endregion Unity Methods
 
-        #region Helper Methods
+        #region Methods
         /// <summary>
         /// 무기 타입과 희귀도로 무기 리스트를 찾는 함수
         /// </summary>
@@ -93,7 +93,20 @@ namespace SwordEnchant.Managers
 
             return GetWeapon(selectedType, selectedRarity);
         }
-        #endregion Helper Methods
+
+        public WeaponObject GetWeaponObject(WeaponList index)
+        {
+            foreach(var weaponObject in weaponObjectDB)
+            {
+                if (weaponObject == null)
+                    continue;
+
+                if (weaponObject.weaponIndex == index)
+                    return weaponObject;
+            }
+            return null;
+        }
+        #endregion Methods
     }
 
 }

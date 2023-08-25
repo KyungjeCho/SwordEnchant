@@ -3735,6 +3735,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344fb9ff4fb144f4385a4634b0772631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponObjectDB:
+  - {fileID: 11400000, guid: 51805d97118f85b44ae92fbbfc399148, type: 2}
+  - {fileID: 11400000, guid: 9a71cc3f7aca94a418bc3864f7784710, type: 2}
+  - {fileID: 11400000, guid: 02337d78ef373e64893213798c8537c8, type: 2}
+  - {fileID: 11400000, guid: a02b9c6b15da3524e98825000244d560, type: 2}
+  - {fileID: 11400000, guid: 684e4f3499ad399468a5311ce5b49287, type: 2}
+  - {fileID: 11400000, guid: 904501937716ae940a92c39516e134b4, type: 2}
+  - {fileID: 11400000, guid: 94e1bb6bc5e170f48a372720194bbe6c, type: 2}
+  - {fileID: 11400000, guid: 5a595a31d74dd81428eed01a745c0391, type: 2}
+  - {fileID: 11400000, guid: c8e7d8ded5559b144a0e98b7b97acd61, type: 2}
+  - {fileID: 11400000, guid: 2d07ff0b941b29840a81ad672c643642, type: 2}
+  - {fileID: 11400000, guid: 506246b8097cbff4ba343840dcf5b378, type: 2}
+  - {fileID: 11400000, guid: e4d980e3e276c2f419dd4dc4b3f4f27c, type: 2}
+  - {fileID: 11400000, guid: 27e76732f7302614f86c9ea9e263f320, type: 2}
+  - {fileID: 11400000, guid: 8845583a0d9a93149be8eee4d33605fe, type: 2}
+  - {fileID: 11400000, guid: eb6fb316d026ddf42a9b8ca8f6e68553, type: 2}
+  - {fileID: 11400000, guid: d31301e3e8e203b4c93360912e1b2024, type: 2}
+  - {fileID: 11400000, guid: bc75549a04c69934a848f00c415f83de, type: 2}
+  - {fileID: 11400000, guid: 169466f03919a9347b1b849caabfb068, type: 2}
 --- !u!1 &814155470
 GameObject:
   m_ObjectHideFlags: 0
@@ -5330,6 +5349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846d181ac63ef6845a5763c6c8ed22eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryObject: {fileID: 0}
   inventory: {fileID: 1957974455}
   slots:
   - {fileID: 6620889644520419678}
@@ -14025,6 +14045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e50581c68ddc847badaea872b92dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryObject: {fileID: 0}
   inventory: {fileID: 1957974455}
   slotPrefab: {fileID: 4080119856810595571, guid: 356a2a495c5d64d4f8e430c6f2a55dc0, type: 3}
 --- !u!114 &1423263315
@@ -37030,24 +37051,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots:
-  - weapon: {fileID: 11400000, guid: 51805d97118f85b44ae92fbbfc399148, type: 2}
+  - weaponIndex: 0
     pm: {fileID: 1413876}
     isEmpty: 0
-  - weapon: {fileID: 11400000, guid: d73fea482083f0f409ba46cf0ef387b5, type: 2}
+    amount: 0
+  - weaponIndex: 0
     pm: {fileID: 994755280}
     isEmpty: 1
-  - weapon: {fileID: 0}
+    amount: 0
+  - weaponIndex: 0
     pm: {fileID: 0}
     isEmpty: 1
-  - weapon: {fileID: 0}
+    amount: 0
+  - weaponIndex: 0
     pm: {fileID: 0}
     isEmpty: 1
-  - weapon: {fileID: 0}
+    amount: 0
+  - weaponIndex: 0
     pm: {fileID: 0}
     isEmpty: 1
-  - weapon: {fileID: 0}
+    amount: 0
+  - weaponIndex: 0
     pm: {fileID: 0}
     isEmpty: 1
+    amount: 0
 --- !u!4 &1957974456
 Transform:
   m_ObjectHideFlags: 0

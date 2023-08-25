@@ -83,7 +83,15 @@ namespace SwordEnchant.Data
                             case "criticalDamage":
                                 weaponClips[currentID].criticalDamage = float.Parse(reader.ReadString());
                                 break;
-
+                            case "korName":
+                                weaponClips[currentID].korName = reader.ReadString();
+                                break;
+                            case "description":
+                                weaponClips[currentID].description = reader.ReadString();
+                                break;
+                            case "weaponType":
+                                weaponClips[currentID].type = (WeaponType)Enum.Parse(typeof(WeaponType), reader.ReadString());
+                                break;
                             case "weaponRarity":
                                 weaponClips[currentID].rarity = (WeaponRarity)Enum.Parse(typeof(WeaponRarity), reader.ReadString());
                                 break;
@@ -116,6 +124,9 @@ namespace SwordEnchant.Data
                     xml.WriteElementString("count", clip.count.ToString());
                     xml.WriteElementString("criticalProb", clip.criticalProb.ToString());
                     xml.WriteElementString("criticalDamage", clip.criticalDamage.ToString());
+                    xml.WriteElementString("korName", clip.korName);
+                    xml.WriteElementString("description", clip.description);
+                    xml.WriteElementString("weaponType", clip.type.ToString());
 
                     xml.WriteElementString("weaponRarity", clip.rarity.ToString());
                 }

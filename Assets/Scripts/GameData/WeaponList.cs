@@ -22,5 +22,7 @@ public enum WeaponList
     Catapult = 13,
     Crossbow = 14,
     Ballista = 15,
+    MagicMissile = 16,
+    Grimoire = 17,
 
 }

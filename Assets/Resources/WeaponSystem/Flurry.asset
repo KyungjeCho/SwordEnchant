@@ -10,31 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b413f8fa645ad747866653706a6ce7c, type: 3}
-  m_Name: BearTrap
+  m_Name: Flurry
   m_EditorClassIdentifier: 
-  weaponIndex: 7
-  icon: {fileID: 1012901781, guid: 80a4fe9511a0da442905dcafd160e004, type: 3}
+  weaponIndex: 0
+  icon: {fileID: 0}
   slotUI: {fileID: 0}
   stats:
     damage:
-      baseValue: 3
-      modifiedValue: 3
+      baseValue: 0
+      modifiedValue: 0
     speed:
-      baseValue: 800
-      modifiedValue: 800
+      baseValue: 0
+      modifiedValue: 0
     size:
-      baseValue: 1
-      modifiedValue: 1
+      baseValue: 0
+      modifiedValue: 0
     cooldown:
-      baseValue: 5
-      modifiedValue: 5
+      baseValue: 0
+      modifiedValue: 0
     count:
-      baseValue: 1
-      modifiedValue: 1
+      baseValue: 0
+      modifiedValue: 0
     criticalDamage:
-      baseValue: 5
-      modifiedValue: 5
+      baseValue: 0
+      modifiedValue: 0
     criticalProb:
-      baseValue: 0.1
-      modifiedValue: 0.1
-    weaponIndex: 7
+      baseValue: 0
+      modifiedValue: 0
+    weaponIndex: 0
