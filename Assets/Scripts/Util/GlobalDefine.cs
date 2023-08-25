@@ -20,12 +20,15 @@ public static class GameObjectName
     public const string Boomerang  = "Boomerang";
     public const string ChainLightning  = "ChainLightning";
 
+    public const string Melee       = "Melee";
+    public const string LongRange   = "LongRange";
+    public const string Magic       = "Magic";
 }
 
 public static class SceneManagement
 {
-    public const string Lobby = "LobbyScene";
-    public const string Battle = "TestScene";
+    public const string Lobby       = "LobbyScene";
+    public const string Battle      = "TestScene";
 }
 public static class TagAndLayerKey
 {
@@ -33,7 +36,8 @@ public static class TagAndLayerKey
 }
 public static class PathName
 {
-    public const string WeaponObjectPath = "WeaponSystem";
+    public const string WeaponObjectPath        = "WeaponSystem";
+    public const string WeaponTypeObjectPath    = "WeaponSystem/Types";
 }
 
 public static class SaveDataKey

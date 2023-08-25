@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f05bbd226ac604996f53a8f93eaa7d, type: 3}
+  m_Name: LongRange
+  m_EditorClassIdentifier: 
+  weaponType: 1
+  typeName: "\uC6D0\uAC70\uB9AC"
+  description: "\uB113\uC740 \uC0AC\uC815\uAC70\uB9AC\uC640 \uBE60\uB978 \uC5F0\uBC1C\uC774
+    \uD2B9\uC9D5\uC774\uB2E4.\n\uD30C\uB780\uC0C9 \uBB3C \uC18D\uC131\uC758 \uBAAC\uC2A4\uD130\uC5D0
+    \uAC15\uD558\uB2E4."
+  icon: {fileID: 0}
+  color: {r: 0.28595585, g: 0.9622642, b: 0.34115356, a: 0}
+  damage:
+    baseValue: 0
+    modifiedValue: 0

@@ -13,6 +13,7 @@ namespace SwordEnchant.WeaponSystem
         public WeaponType weaponType;
         
         public string typeName = string.Empty;
+        [Multiline(10)]
         public string description = string.Empty;
 
         [Header("UI")]
