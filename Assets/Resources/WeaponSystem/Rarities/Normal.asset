@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f81552c1ff5edb047986aa83b4392c38, type: 3}
+  m_Name: Normal
+  m_EditorClassIdentifier: 
+  weaponRarity: 0
+  rarityName: "\uB178\uB9D0"
+  description: "\uC81C\uC77C \uB9CE\uC774 \uB098\uC624\uB294 \uD3C9\uBC94\uD55C \uB4F1\uAE09."
+  color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+  prob: 52.2
+  canSell: 1
+  price: 1

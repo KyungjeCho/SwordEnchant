@@ -9,12 +9,12 @@ namespace SwordEnchant.Data
     public enum WeaponRarity
     {
         None = -1,
-        Common = 0,
-        Uncommon = 1,
-        Rare = 2,
-        Epic = 3,
-        Unique = 4,
-        Legendary = 5
+        Normal = 0,
+        Rare = 1,
+        Epic = 2,
+        Unique = 3,
+        Legendary = 4,
+        Mythic = 5
     }
     public enum WeaponType
     {

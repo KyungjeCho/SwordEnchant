@@ -23,6 +23,14 @@ public static class GameObjectName
     public const string Melee       = "Melee";
     public const string LongRange   = "LongRange";
     public const string Magic       = "Magic";
+
+    public const string Normal      = "Normal";
+    public const string Rare        = "Rare";
+    public const string Epic        = "Epic";
+    public const string Unique      = "Unique";
+    public const string Legendary   = "Legendary";
+    public const string Mythic      = "Mythic";
+    
 }
 
 public static class SceneManagement
@@ -38,6 +46,7 @@ public static class PathName
 {
     public const string WeaponObjectPath        = "WeaponSystem";
     public const string WeaponTypeObjectPath    = "WeaponSystem/Types";
+    public const string WeaponRarityObjectPath  = "WeaponSystem/Rarities";   
 }
 
 public static class SaveDataKey
