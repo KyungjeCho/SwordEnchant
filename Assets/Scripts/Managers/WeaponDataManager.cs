@@ -13,6 +13,7 @@ namespace SwordEnchant.Managers
 
         public Dictionary<WeaponRarity, WeaponRarityObject> rarityDB = new Dictionary<WeaponRarity, WeaponRarityObject>();
 
+        public WeaponObject[] weaponObjectDB = new WeaponObject[18];
         private Dictionary<WeaponRarity, float> histogramWeaponRarity = new Dictionary<WeaponRarity, float>();
         #endregion Variables
 

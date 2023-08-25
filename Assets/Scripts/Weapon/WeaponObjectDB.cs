@@ -8,6 +8,7 @@ namespace SwordEnchant.WeaponSystem
     public class WeaponObjectDB : ScriptableObject
     {
         public WeaponObject[] weaponObjects;
+
     }
 }
 

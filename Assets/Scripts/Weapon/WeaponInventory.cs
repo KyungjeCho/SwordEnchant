@@ -19,7 +19,7 @@ namespace SwordEnchant.WeaponSystem
                     if (slot.isEmpty == true)
                         continue;
 
-                    if (slot.weapon.weaponIndex == WeaponList.None)
+                    if (slot.weaponIndex == WeaponList.None)
                         continue;
 
                     slot.pm.gameObject.SetActive(true);
@@ -35,8 +35,8 @@ namespace SwordEnchant.WeaponSystem
                 if (slot.isEmpty == true)
                     continue;
 
-                if (slot.weapon.weaponIndex == WeaponList.None)
-                    continue;
+                //if (slot.weaponObject.weaponIndex == WeaponList.None)
+                //    continue;
 
                 // TODO: change 
                 //slot.weapon.UpdateTimer(Time.deltaTime);
@@ -53,7 +53,7 @@ namespace SwordEnchant.WeaponSystem
             if (ProjectileManagersDB.Instance.GetPM(weapon.weaponIndex) == null)
                 return false;
 
-            slots[GetFullSlotCount()].weapon = weapon;
+            //slots[GetFullSlotCount()].weaponObject = weapon;
             slots[GetFullSlotCount()].pm = ProjectileManagersDB.Instance.GetPM(weapon.weaponIndex);
             slots[GetFullSlotCount()].pm.gameObject.SetActive(true);
             slots[GetFullSlotCount()].isEmpty = false;
@@ -65,7 +65,7 @@ namespace SwordEnchant.WeaponSystem
 
         public WeaponInventorySlot FindWeaponInInventory(WeaponObject weapon)
         {
-            return slots.FirstOrDefault(i => i.weapon.Clip.weaponName == weapon.Clip.weaponName);
+            return new WeaponInventorySlot(); // slots.FirstOrDefault(i => i.weaponObject.Clip.weaponName == weapon.Clip.weaponName);
         }
         public void Clear()
         {
@@ -77,7 +77,7 @@ namespace SwordEnchant.WeaponSystem
 
         public bool IsContain(WeaponObject weaponObject)
         {
-            return Array.Find(slots, i => i.weapon == weaponObject) != null;
+            return true; // Array.Find(slots, i => i.weaponObject == weaponObject) != null;
         }
 
         public int GetFullSlotCount()

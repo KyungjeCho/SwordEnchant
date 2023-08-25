@@ -1,3 +1,4 @@
+using SwordEnchant.Managers;
 using SwordEnchant.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace SwordEnchant.UI
     public abstract class InventoryUI : MonoBehaviour
     {
         #region Variables
+        public InventoryObject inventoryObject;
+
         public WeaponInventory inventory;
         private WeaponInventory previousInventory;
 
@@ -22,15 +25,20 @@ namespace SwordEnchant.UI
         private void Awake()
         {
             CreateSlots();
+
+            for (int i = 0; i < inventoryObject.Slots.Length; i++)
+            {
+                inventoryObject.Slots[i].parent         = inventoryObject;
+                inventoryObject.Slots[i].OnPostUpdate   += OnPostUpdate;
+            }
         }
 
-        private void OnEnable()
+        protected virtual void Start()
         {
-            //CreateSlots();
-        }
-        private void Start()
-        {
-            
+            for (int i = 0; i < inventoryObject.Slots.Length; i++)
+            {
+                inventoryObject.Slots[i].UpdateSlot(inventoryObject.Slots[i].weaponIndex, inventoryObject.Slots[i].amount);
+            }
         }
         #endregion Unity Methods
 
@@ -39,14 +47,7 @@ namespace SwordEnchant.UI
 
         public void OnPostUpdate(WeaponInventorySlot slot)
         {
-            if (slot == null || slot.slotUI == null)
-            {
-                return;
-            }
-
-            slot.slotUI.transform.GetChild(0).GetComponent<Image>().sprite = slot.weapon.weaponIndex == WeaponList.None ? null : slot.weapon.icon;
-            slot.slotUI.transform.GetChild(0).GetComponent<Image>().color = slot.weapon.weaponIndex == WeaponList.None ? new Color(1, 1, 1, 0) : new Color(1, 1, 1, 1);
-            
+            //slot.slotUI.transform.GetChild(0).GetComponent<Image>().sprite = slot.weaponIndex == WeaponList.None ? null : DataManager.WeaponData().weaponClips[slot.weaponIndex].
         }
 
         protected void AddEvent(GameObject go, EventTriggerType type, UnityAction<BaseEventData> action)

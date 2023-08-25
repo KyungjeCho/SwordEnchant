@@ -43,9 +43,9 @@ public class WeaponUpgradeInventoryUI : InventoryUI
                 slotWeapon.Add(slotGO, null);
             else
             {
-                slotWeapon.Add(slotGO, inventory.slots[i].weapon);
+                //slotWeapon.Add(slotGO, inventory.slots[i].weaponIndex);
                 SlotNodeController nc = slotGO.GetComponent<SlotNodeController>();
-                nc.InitUI(inventory.slots[i].weapon.icon, false);
+                //nc.InitUI(inventory.slots[i].weaponIndex.icon, false);
             }
         }
     }

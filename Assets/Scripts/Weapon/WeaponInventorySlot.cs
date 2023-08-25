@@ -9,36 +9,45 @@ namespace SwordEnchant.WeaponSystem
     [Serializable]
     public class WeaponInventorySlot
     {
+        #region Variables
         [NonSerialized]
         public GameObject slotUI;
         [NonSerialized]
-        public WeaponInventory parent;
+        public InventoryObject parent;
 
         [NonSerialized]
         public Action<WeaponInventorySlot> OnPreUpdate;
         [NonSerialized]
         public Action<WeaponInventorySlot> OnPostUpdate;
 
-        public WeaponObject weapon;
-        public BaseProjectileManager pm;
+        public WeaponList weaponIndex;
+        public BaseProjectileManager pm; // -> 
 
         public bool isEmpty;
+        public int amount;
+        #endregion Varaibles
 
-        //public WeaponInventorySlot() => UpdateSlot(new WeaponObject(), true);
-        //public WeaponInventorySlot(WeaponObject weapon, bool isEmpty) => UpdateSlot(weapon, isEmpty);
 
-        //public void RemoveWeapon() => UpdateSlot(new WeaponObject(), true);
-        //public void AddWeapon(bool isEmpty) => UpdateSlot(weapon, isEmpty);
+        public WeaponInventorySlot() => UpdateSlot(WeaponList.None, 0);
 
-        //public void UpdateSlot(WeaponObject weapon, bool isEmpty = false)
-        //{
-        //    OnPreUpdate?.Invoke(this);
+        public WeaponInventorySlot(WeaponList index, int amount) => UpdateSlot(index, amount);
 
-        //    this.weapon = weapon;
-        //    this.isEmpty = isEmpty;
+        public void RemoveWeapon() => UpdateSlot(weaponIndex, 0);
+        public void AddAmount(int value) => UpdateSlot(weaponIndex, amount += value);
 
-        //    OnPostUpdate?.Invoke(this);
-        //}
+
+        public void UpdateSlot(WeaponList index, int amount)
+        {
+            if (amount <= 0)
+            {
+                return;
+            }
+
+            OnPreUpdate?.Invoke(this);
+            this.weaponIndex    = index;
+            this.amount         = amount;
+            OnPostUpdate?.Invoke(this);
+        }
     }
 }
 
