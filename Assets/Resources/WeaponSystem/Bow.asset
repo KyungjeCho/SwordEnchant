@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   weaponIndex: 0
-  icon: {fileID: 3954498890667939939, guid: b178835965d76f343b0bdef4517d3fa2, type: 3}
+  icon: {fileID: 21300000, guid: 5543c22aa9ba03c4f8578c96a438f476, type: 3}
+  slotUI: {fileID: 0}

@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace SwordEnchant.WeaponSystem
 {
+    [Serializable]
     public class WeaponStats
     {
         public ModifiableFloat damage;
@@ -52,6 +53,16 @@ namespace SwordEnchant.WeaponSystem
             criticalProb.BaseValue = clip.criticalProb;
         }
 
+        public void ClearModifier()
+        {
+            damage.ClearModifier();
+            speed.ClearModifier();
+            size.ClearModifier();
+            cooldown.ClearModifier();
+            count.ClearModifier();
+            criticalDamage.ClearModifier();
+            criticalProb.ClearModifier();
+        }
         private void OnModifiedValue(ModifiableFloat value)
         {
             OnChangedStats?.Invoke(this);

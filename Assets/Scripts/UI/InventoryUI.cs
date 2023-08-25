@@ -21,7 +21,12 @@ namespace SwordEnchant.UI
         #region Unity Methods
         private void Awake()
         {
-            
+            CreateSlots();
+        }
+
+        private void OnEnable()
+        {
+            //CreateSlots();
         }
         private void Start()
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SwordEnchant.Core;
 using UnityEngine;
 using SwordEnchant.WeaponSystem;
+using SwordEnchant.Managers;
 
 namespace SwordEnchant.Projectile
 {
@@ -16,9 +17,9 @@ namespace SwordEnchant.Projectile
         protected Rigidbody2D myRigidbody2D;
 
         [SerializeField]
-        private float timeToSelfDestruct = 10.0f;
+        protected float timeToSelfDestruct = 10.0f;
 
-        private bool collided = false;
+        protected bool collided = false;
         #endregion Variables
 
         #region Unity Methods
@@ -29,23 +30,27 @@ namespace SwordEnchant.Projectile
 
         void OnEnable() 
         {
-            
+            myRigidbody2D = GetComponent<Rigidbody2D>();
+            transform.localScale = Vector3.one * parent.Stats.size.ModifiedValue;
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other) 
         {
-            if (collided)
+            if (other.tag == "Enemy")
             {
-                return;
-            }    
+                if (collided)
+                {
+                    return;
+                }
 
-            collided = true;
-            IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
-            
-            if (damagable != null)
-            {
-                damagable.TakeDamage(1f, null, Vector2.zero);
+                IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
+                if (damagable != null)
+                {
+                    damagable.TakeDamage(parent.Stats.damage.ModifiedValue, parent.Stats.criticalDamage.ModifiedValue, parent.Stats.criticalProb.ModifiedValue,  DataManager.EffectData().GetClip((int)EffectList.Hit_1).effectPrefab, other.ClosestPoint(transform.position));
+                    
+                }
             }
+            
         }
         #endregion Unity Methods
 
@@ -58,7 +63,7 @@ namespace SwordEnchant.Projectile
         #region Virtual Methods
         public virtual void OnEnter()
         {
-
+            transform.localScale = Vector3.one * parent.Stats.size.ModifiedValue;
         }
 
         public virtual void OnExit()

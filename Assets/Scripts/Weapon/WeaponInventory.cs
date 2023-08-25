@@ -9,10 +9,28 @@ namespace SwordEnchant.WeaponSystem
     public class WeaponInventory : MonoBehaviour
     {
         public WeaponInventorySlot[] slots = new WeaponInventorySlot[6];
-        
+
+        private void Start()
+        {
+            if (GetFullSlotCount() > 0)
+            {
+                foreach (WeaponInventorySlot slot in slots)
+                {
+                    if (slot.isEmpty == true)
+                        continue;
+
+                    if (slot.weapon.weaponIndex == WeaponList.None)
+                        continue;
+
+                    slot.pm.gameObject.SetActive(true);
+                    //slot.weapon.OnEnter();
+                }
+            }
+        }
         private void Update()
         {
-            foreach(WeaponInventorySlot slot in slots)
+            
+            foreach (WeaponInventorySlot slot in slots)
             {
                 if (slot.isEmpty == true)
                     continue;
@@ -20,17 +38,26 @@ namespace SwordEnchant.WeaponSystem
                 if (slot.weapon.weaponIndex == WeaponList.None)
                     continue;
 
-                slot.weapon.UpdateTimer(Time.deltaTime);
+                // TODO: change 
+                //slot.weapon.UpdateTimer(Time.deltaTime);
             }
+            
         }
 
         public bool AddWeapon(WeaponObject weapon)
         {
-            if (IsContain(weapon))
-            {
+            //if (IsContain(weapon))
+            //{
+            //    return false;
+            //}
+            if (ProjectileManagersDB.Instance.GetPM(weapon.weaponIndex) == null)
                 return false;
-            }
+
             slots[GetFullSlotCount()].weapon = weapon;
+            slots[GetFullSlotCount()].pm = ProjectileManagersDB.Instance.GetPM(weapon.weaponIndex);
+            slots[GetFullSlotCount()].pm.gameObject.SetActive(true);
+            slots[GetFullSlotCount()].isEmpty = false;
+            //weapon.OnEnter();
             //slots[GetFullSlotCount()].AddWeapon(false);
 
             return true;
@@ -50,7 +77,7 @@ namespace SwordEnchant.WeaponSystem
 
         public bool IsContain(WeaponObject weaponObject)
         {
-            return Array.Find(slots, i => i.weapon.Clip.realID == weaponObject.Clip.realID) != null;
+            return Array.Find(slots, i => i.weapon == weaponObject) != null;
         }
 
         public int GetFullSlotCount()

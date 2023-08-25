@@ -20,9 +20,14 @@ namespace SwordEnchant.Characters
         #region Properties
         private float h;
         private float v;
+        protected Vector2 direction = Vector2.left;
 
         public float GetH { get => h; }
         public float GetV { get => v; }
+
+        [HideInInspector]
+        public Vector2 GetDir { get => direction; }
+
         public Rigidbody2D GetRigidbody { get => myRigidbody2D; }
         public int GetDefaultBehaviour { get => defaultBehaviour;  }
         #endregion Properties
@@ -36,10 +41,20 @@ namespace SwordEnchant.Characters
         }
         private void Update()
         {
-#if UNITY_EDITOR
+
             h = Input.GetAxis(InputKeyName.Horizontal);
             v = Input.GetAxis(InputKeyName.Vertical);
-#endif 
+
+            if (h > 0)
+                direction = new Vector2(1f, direction.y);
+            if (h < 0)
+                direction = new Vector2(-1f, direction.y);
+            
+            if (v > 0)
+                direction = new Vector2(direction.x, 1f);
+            if (v < 0)
+                direction = new Vector2(direction.x, -1f);
+
 #if UNITY_ANDROID
             Debug.Log("안드로이드");
 #endif

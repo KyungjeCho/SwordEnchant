@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using SwordEnchant.Core;
+using SwordEnchant.Util;
 using UnityEngine;
 
 namespace SwordEnchant.Characters
@@ -24,9 +25,10 @@ namespace SwordEnchant.Characters
         #region IDamagable Interface
         public bool IsAlive => (health > 0);
 
-        public void TakeDamage(float damage, GameObject hitEffect, Vector3 hitPoint)
+        public void TakeDamage(float damage, float criticalDamage, float criticalProb, GameObject hitEffect, Vector3 hitPoint)
         {
-            Debug.Log("플레이어 충돌");
+            float totalDamage = Formula.TotalDamage(damage, 1f, 0f, Formula.IsCritical(criticalProb));
+            health -= totalDamage;
         }
         #endregion IDamagable Interface
     }

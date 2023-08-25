@@ -16,7 +16,13 @@ namespace SwordEnchant.Data
         Unique = 4,
         Legendary = 5
     }
-
+    public enum WeaponType
+    {
+        None = -1,
+        MELEE = 0,
+        LONGRANGE = 1,
+        MAGIC = 2
+    }
     public class WeaponClip
     {
         public int realID = 0;
@@ -34,8 +40,10 @@ namespace SwordEnchant.Data
         public float count;         // 투사체 사출량
         public float criticalProb; // 크리 확률
         public float criticalDamage;
-
+        public string korName;
+        public string description;
         public WeaponRarity rarity = WeaponRarity.None;
+        public WeaponType type = WeaponType.None;
 
         public WeaponClip() { }
 

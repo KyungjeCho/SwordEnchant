@@ -82,6 +82,18 @@ namespace SwordEnchant.Data
             modifiers.Remove(modifier);
             UpdateModifiedValue();
         }
+
+        public void ClearModifier()
+        {
+            modifiers.Clear();
+            UpdateModifiedValue();
+        }
+
+        public void PrintModifier()
+        {
+            Debug.Log(modifiers.Count);
+
+        }
     }
 }
 

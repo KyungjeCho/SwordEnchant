@@ -1,3 +1,4 @@
+using SwordEnchant.Projectile;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace SwordEnchant.WeaponSystem
         public Action<WeaponInventorySlot> OnPostUpdate;
 
         public WeaponObject weapon;
+        public BaseProjectileManager pm;
 
         public bool isEmpty;
 

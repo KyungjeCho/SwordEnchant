@@ -37,6 +37,11 @@ namespace SwordEnchant.Managers
 
         public void Push(Poolable poolable)
         {
+            //if (poolable == null)
+            //{
+            //    //Debug.LogError(poolable);
+            //    return;
+            //}
             string name = poolable.gameObject.name;
 
             if (pool.ContainsKey(name) == false)
@@ -50,6 +55,9 @@ namespace SwordEnchant.Managers
 
         public Poolable Pop(GameObject original, Transform parent = null)
         {
+            //if (original == null)
+            //    return null;
+
             if (pool.ContainsKey(original.name) == false)
             {
                 CreatePool(original);

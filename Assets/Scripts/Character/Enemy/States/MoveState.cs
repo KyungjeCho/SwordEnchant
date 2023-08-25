@@ -21,6 +21,7 @@ namespace SwordEnchant.Core
         {
             context.FindPlayer();
             context.CalculateDirection();
+            
         }
 
         public override void OnExit()

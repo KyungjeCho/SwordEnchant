@@ -13,7 +13,7 @@ namespace SwordEnchant.Core
     {
         public static UnityObject Load(string path)
         {
-            //짐금은 리소스 로드지만 추후엔 어셋 로드로 변경됨.
+            //지금은 리소스 로드지만 추후엔 어셋 로드로 변경됨.
             return Resources.Load(path);
         }
 

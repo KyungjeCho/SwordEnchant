@@ -41,7 +41,7 @@ namespace SwordEnchant.Characters
 
         #region Damagable Methods
         public bool IsAlive => (health > 0);
-        public void TakeDamage(float damage, GameObject hitEffectPrefabs, Vector3 hitPoint)
+        public void TakeDamage(float damage, float criticalDamage, float criticalProb, GameObject hitEffectPrefabs, Vector3 hitPoint)
         {
             if (!IsAlive)
             {

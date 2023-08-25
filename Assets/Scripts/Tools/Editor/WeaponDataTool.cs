@@ -81,7 +81,17 @@ public class WeaponDataTool : EditorWindow
                                 weaponData.weaponClips[selection].count = EditorGUILayout.FloatField("Count", weaponData.weaponClips[selection].count, GUILayout.Width(uiWidthXLarge));
                                 weaponData.weaponClips[selection].criticalProb = EditorGUILayout.FloatField("Critical Probability", weaponData.weaponClips[selection].criticalProb, GUILayout.Width(uiWidthXLarge));
                                 weaponData.weaponClips[selection].criticalDamage = EditorGUILayout.FloatField("Critical Damage", weaponData.weaponClips[selection].criticalDamage, GUILayout.Width(uiWidthXLarge));
+                                weaponData.weaponClips[selection].korName = EditorGUILayout.TextField("Kor Name", weaponData.weaponClips[selection].korName, GUILayout.Width(uiWidthXLarge));
+                                EditorGUILayout.BeginHorizontal();
+                                {
+                                    EditorGUILayout.LabelField("Description", GUILayout.Width(uiWidthSmall));
+                                    weaponData.weaponClips[selection].description = EditorGUILayout.TextArea(weaponData.weaponClips[selection].description,
+                                        GUILayout.Width(uiWidthXLarge), GUILayout.Height(uiWidthLarge), GUILayout.MinWidth(0), GUILayout.MaxWidth(uiWidthXLarge), GUILayout.MinHeight(0),
+                                         GUILayout.MaxHeight(uiWidthLarge), GUILayout.ExpandWidth(false), GUILayout.ExpandHeight(false));
+                                }
+                                EditorGUILayout.EndHorizontal();
                                 weaponData.weaponClips[selection].rarity = (WeaponRarity)EditorGUILayout.EnumPopup("Rarity", weaponData.weaponClips[selection].rarity, GUILayout.Width(uiWidthLarge));
+                                weaponData.weaponClips[selection].type = (WeaponType)EditorGUILayout.EnumPopup("Type", weaponData.weaponClips[selection].type, GUILayout.Width(uiWidthLarge));
                                 EditorGUILayout.Separator();
 
                                 if (weaponDataSource == null && weaponData.weaponClips[selection].weaponName != string.Empty)

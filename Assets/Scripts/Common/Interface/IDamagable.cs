@@ -10,7 +10,7 @@ namespace SwordEnchant.Core
         {
             get;
         }
-        void TakeDamage(float damage, GameObject hitEffectPrefabs, Vector3 hitPoint);
+        void TakeDamage(float damage, float criticalDamage, float criticalProb, GameObject hitEffectPrefabs, Vector3 hitPoint);
     }
 }
 

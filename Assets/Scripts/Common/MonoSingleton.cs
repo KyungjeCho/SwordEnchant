@@ -40,13 +40,19 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        //ShuttingDown = true;
+        instance = null;
+    }
     private void OnApplicationQuit()
     {
-        ShuttingDown = true;
+        //ShuttingDown = true;
     }
 
     private void OnDestroy()
     {
-        ShuttingDown = true;
+        //ShuttingDown = true;
+        instance = null;
     }
 }
