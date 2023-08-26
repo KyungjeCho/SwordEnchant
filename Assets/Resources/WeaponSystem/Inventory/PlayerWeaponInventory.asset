@@ -14,30 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container:
     slots:
-    - weaponIndex: -1
+    - weaponIndex: 1
       pm: {fileID: 0}
       isEmpty: 0
-      amount: 0
-    - weaponIndex: -1
+      amount: 1
+    - weaponIndex: 6
       pm: {fileID: 0}
       isEmpty: 0
-      amount: 0
-    - weaponIndex: -1
+      amount: 1
+    - weaponIndex: 7
       pm: {fileID: 0}
       isEmpty: 0
-      amount: 0
-    - weaponIndex: -1
+      amount: 1
+    - weaponIndex: 10
       pm: {fileID: 0}
       isEmpty: 0
-      amount: 0
-    - weaponIndex: -1
+      amount: 1
+    - weaponIndex: 9
       pm: {fileID: 0}
       isEmpty: 0
-      amount: 0
-    - weaponIndex: -1
+      amount: 1
+    - weaponIndex: 12
       pm: {fileID: 0}
       isEmpty: 0
-      amount: 0
+      amount: 1
     - weaponIndex: -1
       pm: {fileID: 0}
       isEmpty: 0

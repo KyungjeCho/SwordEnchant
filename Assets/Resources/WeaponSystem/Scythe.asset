@@ -12,29 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b413f8fa645ad747866653706a6ce7c, type: 3}
   m_Name: Scythe
   m_EditorClassIdentifier: 
-  weaponIndex: 0
+  weaponIndex: 9
   icon: {fileID: 0}
   slotUI: {fileID: 0}
   stats:
     damage:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 5
+      modifiedValue: 5
     speed:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 800
+      modifiedValue: 800
     size:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 1
+      modifiedValue: 1
     cooldown:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 3
+      modifiedValue: 3
     count:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 1
+      modifiedValue: 1
     criticalDamage:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 4
+      modifiedValue: 4
     criticalProb:
-      baseValue: 0
-      modifiedValue: 0
-    weaponIndex: 0
+      baseValue: 0.1
+      modifiedValue: 0.1
+    weaponIndex: 9

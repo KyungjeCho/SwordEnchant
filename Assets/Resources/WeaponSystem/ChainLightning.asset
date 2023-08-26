@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b413f8fa645ad747866653706a6ce7c, type: 3}
   m_Name: ChainLightning
   m_EditorClassIdentifier: 
-  weaponIndex: 4
+  weaponIndex: 3
   icon: {fileID: -766921868, guid: 4fbd40dda69c4a847a7d728765ee4e63, type: 3}
   slotUI: {fileID: 0}
   stats:
@@ -23,8 +23,8 @@ MonoBehaviour:
       baseValue: 800
       modifiedValue: 800
     size:
-      baseValue: 1
-      modifiedValue: 1
+      baseValue: 0.5
+      modifiedValue: 0.5
     cooldown:
       baseValue: 5
       modifiedValue: 5
@@ -37,4 +37,4 @@ MonoBehaviour:
     criticalProb:
       baseValue: 0.01
       modifiedValue: 0.01
-    weaponIndex: 4
+    weaponIndex: 3

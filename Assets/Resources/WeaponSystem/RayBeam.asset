@@ -12,29 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b413f8fa645ad747866653706a6ce7c, type: 3}
   m_Name: RayBeam
   m_EditorClassIdentifier: 
-  weaponIndex: 0
+  weaponIndex: 8
   icon: {fileID: 0}
   slotUI: {fileID: 0}
   stats:
     damage:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 6
+      modifiedValue: 6
     speed:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 500
+      modifiedValue: 500
     size:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 1
+      modifiedValue: 1
     cooldown:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 7
+      modifiedValue: 7
     count:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 1
+      modifiedValue: 1
     criticalDamage:
       baseValue: 0
       modifiedValue: 0
     criticalProb:
       baseValue: 0
       modifiedValue: 0
-    weaponIndex: 0
+    weaponIndex: 8

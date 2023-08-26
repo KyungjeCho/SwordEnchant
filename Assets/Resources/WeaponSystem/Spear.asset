@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b413f8fa645ad747866653706a6ce7c, type: 3}
   m_Name: Spear
   m_EditorClassIdentifier: 
-  weaponIndex: 9
+  weaponIndex: 7
   icon: {fileID: 21300000, guid: 1c45f0d18f89c7a4baf1211dea51905c, type: 3}
   slotUI: {fileID: 0}
   stats:
@@ -37,4 +37,4 @@ MonoBehaviour:
     criticalProb:
       baseValue: 0.1
       modifiedValue: 0.1
-    weaponIndex: 9
+    weaponIndex: 7

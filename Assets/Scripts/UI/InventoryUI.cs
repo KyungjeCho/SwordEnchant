@@ -2,6 +2,7 @@ using SwordEnchant.Managers;
 using SwordEnchant.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -26,19 +27,20 @@ namespace SwordEnchant.UI
         {
             CreateSlots();
 
-            //for (int i = 0; i < inventoryObject.Slots.Length; i++)
-            //{
-            //    inventoryObject.Slots[i].parent         = inventoryObject;
-            //    inventoryObject.Slots[i].OnPostUpdate   += OnPostUpdate;
-            //}
+            for (int ii = 0; ii < inventoryObject.Slots.Length; ii++)
+            {
+                inventoryObject.Slots[ii].parent = inventoryObject;
+                inventoryObject.Slots[ii].OnPostUpdate += OnPostUpdate;
+            }
         }
 
         protected virtual void Start()
         {
-            //for (int i = 0; i < inventoryObject.Slots.Length; i++)
-            //{
-            //    inventoryObject.Slots[i].UpdateSlot(inventoryObject.Slots[i].weaponIndex, inventoryObject.Slots[i].amount);
-            //}
+            for (int ii = 0; ii < inventoryObject.Slots.Length; ++ii)
+            {
+                inventoryObject.Slots[ii].UpdateSlot(inventoryObject.Slots[ii].weaponIndex, inventoryObject.Slots[ii].amount);
+            }
+
         }
         #endregion Unity Methods
 
@@ -47,7 +49,9 @@ namespace SwordEnchant.UI
 
         public void OnPostUpdate(WeaponInventorySlot slot)
         {
-            //slot.slotUI.transform.GetChild(0).GetComponent<Image>().sprite = slot.weaponIndex == WeaponList.None ? null : DataManager.WeaponData().weaponClips[slot.weaponIndex].
+            slot.slotUI.transform.GetChild(1).GetComponent<Image>().sprite = slot.weaponIndex == WeaponList.None ? null : WeaponDataManager.Instance.GetWeaponObject(slot.weaponIndex).icon;
+            slot.slotUI.transform.GetChild(1).GetComponent<Image>().color = slot.weaponIndex == WeaponList.None ? new Color(1f, 1f, 1f, 0.4f) : new Color(1f, 1f, 1f, 1f);
+            slot.slotUI.GetComponentInChildren<TextMeshProUGUI>().text = slot.weaponIndex == WeaponList.None ? string.Empty : slot.amount.ToString("n0");
         }
 
         protected void AddEvent(GameObject go, EventTriggerType type, UnityAction<BaseEventData> action)
@@ -64,22 +68,7 @@ namespace SwordEnchant.UI
             trigger.triggers.Add(eventTrigger);
         }
 
-        public void OnEnterInterface(GameObject go)
-        {
-            
-        }
-
-        public void OnExitInterface(GameObject go)
-        {
-
-        }
-
-        public void OnEnter(GameObject go)
-        {
-
-        }
-
-        public void OnExit(GameObject go)
+        public virtual void OnClick(GameObject go, PointerEventData data)
         {
 
         }

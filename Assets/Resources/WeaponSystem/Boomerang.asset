@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b413f8fa645ad747866653706a6ce7c, type: 3}
   m_Name: Boomerang
   m_EditorClassIdentifier: 
-  weaponIndex: 3
+  weaponIndex: 2
   icon: {fileID: 21300000, guid: 79bb64e9ee1706544b420e1d65409bbc, type: 3}
   slotUI: {fileID: 0}
   stats:
@@ -23,8 +23,8 @@ MonoBehaviour:
       baseValue: 500
       modifiedValue: 500
     size:
-      baseValue: 2
-      modifiedValue: 2
+      baseValue: 1
+      modifiedValue: 1
     cooldown:
       baseValue: 3
       modifiedValue: 3
@@ -37,4 +37,4 @@ MonoBehaviour:
     criticalProb:
       baseValue: 0.05
       modifiedValue: 0.05
-    weaponIndex: 3
+    weaponIndex: 2
