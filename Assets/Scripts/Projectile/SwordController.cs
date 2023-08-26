@@ -1,48 +1,78 @@
 using SwordEnchant.Characters;
+using SwordEnchant.Core;
+using SwordEnchant.Data;
 using SwordEnchant.Managers;
 using SwordEnchant.Util;
+using SwordEnchant.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace SwordEnchant.Projectile
 {
+    [RequireComponent(typeof(Poolable))]
     public class SwordController : ProjectileController
     {
         private Transform playerTr;
         private Animator animator;
 
+        private Rigidbody2D rigidbody2D;
+        public float startSpeed = 500;
+
+        private bool isPoolable;
+        public override void OnEnable()
+        {
+            base.OnEnable();
+
+            if (rigidbody2D == null)
+                rigidbody2D = GetComponent<Rigidbody2D>();
+
+            if (playerTr == null)
+                playerTr = GameManager.Instance.playerTr;
+
+        }
         // Start is called before the first frame update
         void Start()
         {
-            playerTr = GameObject.Find("Player").transform;
-            animator = GetComponent<Animator>();
+            if (playerTr == null)
+                playerTr = GameManager.Instance.playerTr;
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
-            if (animator == null)
-                animator = GetComponent<Animator>();
-            
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && 
-                animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            rigidbody2D.AddForce(direction * Time.fixedDeltaTime * startSpeed);
+
+            if (rigidbody2D.velocity.magnitude > parent.Stats.speed.ModifiedValue)
+                rigidbody2D.velocity = direction * parent.Stats.speed.ModifiedValue;
+        }
+
+        protected override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
+            if (other.CompareTag("Enemy") && collided == false)
             {
-                PoolManager.Instance.Push(GetComponent<Poolable>());
+                collided = true;
+                Poolable poolable = GetComponent<Poolable>();
+                if (poolable.isUsing)
+                    PoolManager.Instance.Push(GetComponent<Poolable>());
+                else
+                    Destroy(gameObject);
             }
         }
 
         public override void OnEnter()
         {
-            if (playerTr == null)
-                playerTr = GameObject.Find(GameObjectName.Player).transform;
+            SoundClip clip = DataManager.SoundData().soundClips[(int)shootSound];
+            SoundManager.Instance.PlayEffectSound(clip, playerTr.position, clip.maxVolume);
 
-            BehaviourController bc = playerTr.GetComponent<BehaviourController>();
+            collided = false;
 
-            if (bc == null)
-                return;
+            SetPosition();
 
-            SetPosition(bc.GetDir);
+            SetTargetObject();
+
+            CalcDirectionRatation(-90f);
         }
 
         public override void SetTargetObject(Transform target)
@@ -52,21 +82,15 @@ namespace SwordEnchant.Projectile
 
         public override void SetTargetObject()
         {
-            
+            target = GameManager.Instance.scanner.nearestTarget;
         }
 
-        public void SetPosition(Vector3 direction)
+        public void SetPosition()
         {
             if (playerTr == null)
-                playerTr = GameObject.Find("Player").transform;
+                playerTr = GameManager.Instance.playerTr;
 
-            transform.position = playerTr.position + (direction * 2f);
-
-            
-            if (direction.x < 0f && transform.localScale.x > 0.0f) // flip
-                transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
-            else if (direction.x > 0f && transform.localScale.x < 0.0f)
-                transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
+            transform.position = playerTr.position;
         }
 
         public void SetAngle(Vector3 direction)

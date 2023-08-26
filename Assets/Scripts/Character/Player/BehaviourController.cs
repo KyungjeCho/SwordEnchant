@@ -56,7 +56,7 @@ namespace SwordEnchant.Characters
                 direction = new Vector2(direction.x, -1f);
 
 #if UNITY_ANDROID
-            Debug.Log("안드로이드");
+            
 #endif
 
 

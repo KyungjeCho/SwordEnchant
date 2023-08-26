@@ -46,7 +46,6 @@ namespace SwordEnchant.Characters
         }
         protected virtual void OnCollisionStay2D(Collision2D other)
         {
-            Debug.Log("충돌 처리 전 ");
             if (_elapsedTime < attackCooldown)
             {
                 return;

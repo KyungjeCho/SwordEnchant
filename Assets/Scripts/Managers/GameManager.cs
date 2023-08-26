@@ -12,6 +12,8 @@ namespace SwordEnchant.Managers
         [Header("Player")]
         public Transform playerTr;
 
+        public Scanner scanner;
+
         private int gold = 0;
         private int soul = 0;
 
@@ -29,6 +31,8 @@ namespace SwordEnchant.Managers
         private void Start()
         {
             BattleEventBus.Publish(BattleEventType.START);
+
+            scanner = GetComponent<Scanner>();
         }
         private void OnEnable()
         {
@@ -135,6 +139,7 @@ namespace SwordEnchant.Managers
             UIManager.Instance.UpdateSoul();
         }
 
+        
     }
 }
 

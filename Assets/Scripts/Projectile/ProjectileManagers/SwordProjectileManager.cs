@@ -32,8 +32,6 @@ namespace SwordEnchant.Projectile
             currentCount = 0;
 
             StartCoroutine(WaitForShot());
-
-            
         }
 
         IEnumerator WaitForShot()
@@ -48,23 +46,25 @@ namespace SwordEnchant.Projectile
             Poolable poolable = PoolManager.Instance.Pop(DataManager.WeaponData().weaponClips[(int)weaponObject.weaponIndex].projectilePrefab);
             
             SwordController sc = poolable.GetComponent<SwordController>();
-            float degree;
 
-            if (GameManager.Instance.playerTr.GetComponent<BehaviourController>().GetDir.x > 0)
-                degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount - 90f;
-            else
-                degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount + 90f;
+            sc.OnEnter();
+            //float degree;
 
-            sc.SetPosition(MathHelper.DegreeToVector2(degree));
+            //if (GameManager.Instance.playerTr.GetComponent<BehaviourController>().GetDir.x > 0)
+            //    degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount - 90f;
+            //else
+            //    degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount + 90f;
 
-            if (GameManager.Instance.playerTr.GetComponent<BehaviourController>().GetDir.x > 0)
-                degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount - 90f;
-            else
-                degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount + 270f;
-            sc.SetAngle(new Vector3(0f, 0f, degree));
+            ////sc.SetPosition(MathHelper.DegreeToVector2(degree));
+
+            //if (GameManager.Instance.playerTr.GetComponent<BehaviourController>().GetDir.x > 0)
+            //    degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount - 90f;
+            //else
+            //    degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount + 270f;
+            //sc.SetAngle(new Vector3(0f, 0f, degree));
 
 
-            //sc.OnEnter();
+
             //SoundManager.Instance.PlayOneShotEffect((int)SoundList.Zap_C_02, sc.transform.position, 1f);
 
             if (currentCount >= (int)weaponObject.Stats.count.ModifiedValue)
