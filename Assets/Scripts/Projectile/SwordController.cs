@@ -27,6 +27,7 @@ namespace SwordEnchant.Projectile
 
         public LayerMask targetMask;
 
+        [HideInInspector]
         public ManualCollision attackCollision;
 
         #endregion Varaibles
@@ -40,11 +41,6 @@ namespace SwordEnchant.Projectile
             attackCollision = GetComponent<ManualCollision>();
         }
 
-        private void Update()
-        {
-            
-        }
-
         protected override void OnTriggerEnter2D(Collider2D other)
         {
 
@@ -53,6 +49,10 @@ namespace SwordEnchant.Projectile
         public override void OnEnter()
         {
             base.OnEnter();
+
+            SetPosition();
+
+            StartCoroutine(SelfDestruct());
         }
 
         public void SetPosition()
@@ -61,12 +61,50 @@ namespace SwordEnchant.Projectile
                 playerTr = GameManager.Instance.playerTr;
 
 
-            transform.position = playerTr.position;
-        }
-
-        public void SetAngle(Vector3 direction)
-        {
-            transform.rotation = Quaternion.Euler(direction);
+            if (Number % 2 == 0)
+            {
+                // 만약 지금 좌측을 바라보고 있으면
+                if (playerTr.localScale.x < 0)
+                {
+                    if (transform.localScale.x > 0)
+                        transform.localScale = new Vector3(transform.localScale.x * -1,
+                                                        transform.localScale.y,
+                                                        transform.localScale.z);
+                    transform.position = playerTr.position + Vector3.left * 3f +
+                                        Vector3.up * spaceY * (Number / 2);
+                } 
+                else  // 만약 플레이어가 우측을 바라보고 있으면
+                {
+                    if (transform.localScale.x < 0)
+                        transform.localScale = new Vector3(transform.localScale.x * -1,
+                                                            transform.localScale.y,
+                                                            transform.localScale.z);
+                    transform.position = playerTr.position + Vector3.right * 3f +
+                                        Vector3.up * spaceY * (Number / 2);
+                }
+            }
+            else
+            {
+                // 만약 플레이어가 우측을 바라보고 있으면
+                if (playerTr.localScale.x > 0)
+                {
+                    if (transform.localScale.x > 0)
+                        transform.localScale = new Vector3(transform.localScale.x * -1,
+                                                        transform.localScale.y,
+                                                        transform.localScale.z);
+                    transform.position = playerTr.position + Vector3.left * 3f +
+                                        Vector3.up * spaceY * (Number / 2);
+                }
+                else // 만약 지금 좌측을 바라보고 있으면
+                {
+                    if (transform.localScale.x < 0)
+                        transform.localScale = new Vector3(transform.localScale.x * -1,
+                                                        transform.localScale.y,
+                                                        transform.localScale.z);
+                    transform.position = playerTr.position + Vector3.right * 3f +
+                                        Vector3.up * spaceY * (Number / 2);
+                }
+            }
         }
 
         public void ExecuteAttack()
@@ -75,7 +113,10 @@ namespace SwordEnchant.Projectile
 
             foreach (Collider2D col in colliders)
             {
-                //col.gameObject.GetComponent<IDamagable>()?.TakeDamage(damage, effectPrefab);
+                col.gameObject.GetComponent<IDamagable>()?.TakeDamage(
+                    stats.damage.ModifiedValue, stats.criticalDamage.ModifiedValue,
+                    stats.criticalProb.ModifiedValue, null, col.transform.position);
+
             }
 
         }

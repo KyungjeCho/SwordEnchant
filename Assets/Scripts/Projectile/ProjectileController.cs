@@ -15,6 +15,8 @@ namespace SwordEnchant.Projectile
         #region Variables
         public WeaponObject weaponObject = null; 
         public WeaponList index = WeaponList.None;
+        [HideInInspector]
+        public WeaponStats stats;
 
         public SoundList shootSound;
         public EffectList hitEffect;
@@ -36,10 +38,8 @@ namespace SwordEnchant.Projectile
         #region Unity Methods
         public virtual void Awake()
         {
-            if (weaponObject == null)
-                weaponObject = WeaponDataManager.Instance.GetWeaponObject(index);
-
-            
+            if (index != WeaponList.None)
+                stats = new WeaponStats(index);
         }
         protected virtual void OnTriggerEnter2D(Collider2D other) 
         {
@@ -48,9 +48,11 @@ namespace SwordEnchant.Projectile
                 // 충돌 했을 경우
 
                 // 몬스터에 대미지 입힌다
-                IDamagable damagable = other.GetComponent<IDamagable>();
-                //if (damagable != null)
-                //    damagable.TakeDamage();
+
+                other.GetComponent<IDamagable>()?.TakeDamage(
+                    stats.damage.ModifiedValue, stats.criticalDamage.ModifiedValue,
+                    stats.criticalProb.ModifiedValue, null, other.transform.position
+                );
             }
         }
         #endregion Unity Methods

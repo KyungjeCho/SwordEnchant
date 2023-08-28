@@ -56,5 +56,9 @@ public class Scanner : MonoBehaviour
 
         if (nearestTarget != null)
             Gizmos.DrawWireSphere(nearestTarget.position, 2f);
+
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere(GameManager.Instance.playerTr.position, scanRange);
     }
 }
