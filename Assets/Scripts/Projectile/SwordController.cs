@@ -13,86 +13,46 @@ namespace SwordEnchant.Projectile
     [RequireComponent(typeof(Poolable))]
     public class SwordController : ProjectileController
     {
+        #region Variables
         private Transform playerTr;
         private Animator animator;
+        
+        // 여러 개의 Sword Projectile 간 사이의 공간 
+        [SerializeField]
+        private float spaceY;
 
-        private Rigidbody2D rigidbody2D;
-        public float startSpeed = 500;
-        private TrailRenderer trailRenderer;
+        // 사출 중인 Sword 중에 몇번째 인지
+        [HideInInspector]
+        public int Number { get; set; } = 0;
 
-        private bool isPoolable;
-        public override void OnEnable()
+        public LayerMask targetMask;
+
+        public ManualCollision attackCollision;
+
+        #endregion Varaibles
+
+        public override void Awake()
         {
-            base.OnEnable();
+            base.Awake();
 
-            if (rigidbody2D == null)
-                rigidbody2D = GetComponent<Rigidbody2D>();
-
-            if (playerTr == null)
-                playerTr = GameManager.Instance.playerTr;
-
-            if (trailRenderer == null)
-                trailRenderer = GetComponent<TrailRenderer>();
-
-            trailRenderer.Clear();
-
-        }
-        // Start is called before the first frame update
-        void Start()
-        {
-            if (playerTr == null)
-                playerTr = GameManager.Instance.playerTr;
+            playerTr = GameManager.Instance.playerTr;
+            animator = GetComponent<Animator>();
+            attackCollision = GetComponent<ManualCollision>();
         }
 
-        // Update is called once per frame
-        void FixedUpdate()
+        private void Update()
         {
-            rigidbody2D.AddForce(direction * Time.fixedDeltaTime * startSpeed);
-
-            if (rigidbody2D.velocity.magnitude > parent.Stats.speed.ModifiedValue)
-                rigidbody2D.velocity = direction * parent.Stats.speed.ModifiedValue;
+            
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            base.OnTriggerEnter2D(other);
-            if (type == ProjectileType.Pierce)
-                return;
 
-            if (other.CompareTag("Enemy") && collided == false)
-            { 
-                collided = true;
-                Poolable poolable = GetComponent<Poolable>();
-                if (poolable.isUsing)
-                    PoolManager.Instance.Push(GetComponent<Poolable>());
-                else
-                    Destroy(gameObject);
-            }
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-
-            SetPosition();
-
-            SetTargetObject();
-
-            CalcDirectionRotation(-90f);
-
-            if (type == ProjectileType.Pierce)
-                StartCoroutine(SelfDestruct());
-            trailRenderer.Clear();
-        }
-
-        public override void SetTargetObject(Transform target)
-        {
-            
-        }
-
-        public override void SetTargetObject()
-        {
-            target = GameManager.Instance.scanner.nearestTarget;
         }
 
         public void SetPosition()
@@ -100,18 +60,24 @@ namespace SwordEnchant.Projectile
             if (playerTr == null)
                 playerTr = GameManager.Instance.playerTr;
 
+
             transform.position = playerTr.position;
         }
 
         public void SetAngle(Vector3 direction)
         {
-
             transform.rotation = Quaternion.Euler(direction);
         }
-        public IEnumerator SelfDestruct()
+
+        public void ExecuteAttack()
         {
-            yield return new WaitForSeconds(timeToSelfDestruct);
-            PoolManager.Instance.Push(GetComponent<Poolable>());
+            Collider2D[] colliders = attackCollision?.CheckOverlapBox(targetMask);
+
+            foreach (Collider2D col in colliders)
+            {
+                //col.gameObject.GetComponent<IDamagable>()?.TakeDamage(damage, effectPrefab);
+            }
+
         }
     }
 

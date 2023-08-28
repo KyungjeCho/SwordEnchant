@@ -93,21 +93,21 @@ namespace SwordEnchant.WeaponSystem
 
         public void GenerateProjectile()
         {
-            if (cooldownTimer > 0.0f || weaponIndex == WeaponList.None)
-                return;
+            //if (cooldownTimer > 0.0f || weaponIndex == WeaponList.None)
+            //    return;
 
-            for(int i = 0; i < clip.count; i++)
-            {
-                Poolable poolable = PoolManager.Instance.Pop(DataManager.WeaponData().weaponClips[(int)weaponIndex].projectilePrefab);
-                ProjectileController projectileController = poolable.GetComponent<ProjectileController>();
+            //for(int i = 0; i < clip.count; i++)
+            //{
+            //    Poolable poolable = PoolManager.Instance.Pop(DataManager.WeaponData().weaponClips[(int)weaponIndex].projectilePrefab);
+            //    ProjectileController projectileController = poolable.GetComponent<ProjectileController>();
 
                 
-                if (projectileController != null)
-                {
-                    projectileController.parent = this;
-                    projectileController.OnEnter();                    
-                }
-            }
+            //    if (projectileController != null)
+            //    {
+            //        projectileController.parent = this;
+            //        projectileController.OnEnter();                    
+            //    }
+            //}
         }
 
     }
