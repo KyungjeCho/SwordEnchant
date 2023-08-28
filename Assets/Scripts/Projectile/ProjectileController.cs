@@ -70,7 +70,11 @@ namespace SwordEnchant.Projectile
         #region Virtual Methods
         public virtual void OnEnter()
         {
-            transform.localScale = Vector3.one * parent.Stats.size.ModifiedValue;
+
+            SoundClip clip = DataManager.SoundData().soundClips[(int)shootSound];
+            SoundManager.Instance.PlayEffectSound(clip, GameManager.Instance.playerTr.position, clip.maxVolume);
+
+            collided = false;
         }
 
         public virtual void OnExit()
@@ -84,7 +88,7 @@ namespace SwordEnchant.Projectile
         /// 투사체가 나아갈 방향과 자신의 회전값
         /// </summary>
         /// <param name="startRotZ">원본 스트라이트가 얼마나 기울어 있는지</param>
-        public void CalcDirectionRatation(float startRotZ = 0f)
+        public void CalcDirectionRotation(float startRotZ = 0f)
         {
             if (target != null && index != WeaponList.None)
             {

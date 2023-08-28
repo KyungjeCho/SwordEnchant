@@ -7,89 +7,111 @@ using UnityEngine;
 
 namespace SwordEnchant.Projectile
 {
+    [RequireComponent(typeof(Poolable))]
     public class SpearController : ProjectileController
     {
         private Transform playerTr;
         private Animator animator;
 
-        private Vector3 endPos;
+        private Vector2 endPos;
+        private Rigidbody2D rigidbody2D;
 
-        // Start is called before the first frame update
-        void Start()
+        public float force;
+        public float height;
+        public bool isGround = false;
+        public bool isPlayEffect = false;
+        public EffectList effectIndex;
+        public override void OnEnable()
         {
-            playerTr = GameObject.Find("Player").transform;
-            animator = GetComponent<Animator>();
+            base.OnEnable();
+
+            if (playerTr == null)
+                playerTr = GameManager.Instance.playerTr;
+
+            if (rigidbody2D == null)
+                rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (animator == null)
-                animator = GetComponent<Animator>();
-
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") &&
-                animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            if (transform.position.y < endPos.y)
+                isGround = true;
+        }
+        protected override void OnTriggerEnter2D(Collider2D collision)
+        {
+            base.OnTriggerEnter2D(collision);
+            if (collision.CompareTag("Enemy") && collided == false && isGround)
             {
-                PoolManager.Instance.Push(GetComponent<Poolable>());
+                collided = true;
+                Poolable poolable = GetComponent<Poolable>();
+                if (poolable.isUsing)
+                    PoolManager.Instance.Push(GetComponent<Poolable>());
+                else
+                    Destroy(gameObject);
             }
         }
 
+        private void FixedUpdate()
+        {
+            if (isGround == false)
+            {
+                rigidbody2D.AddForce(Vector2.down * Time.fixedDeltaTime * force);
+            }
+            else
+            {
+                if (isPlayEffect == false)
+                {
+                    EffectManager.Instance.EffectOneShot((int)effectIndex, transform.position);
+                    isPlayEffect = true;
+                }
+                isGround = true;
+                rigidbody2D.velocity = Vector2.zero;
+                StartCoroutine(SelfDestruct());
+            }
+        }
         public override void OnEnter()
         {
-            //if (playerTr == null)
-            //    playerTr = GameManager.Instance.playerTr;
+            base.OnEnter();
 
-            //BehaviourController bc = playerTr.GetComponent<BehaviourController>();
+            SetTargetObject();
 
-            //if (bc == null)
-            //    return;
+            endPos = target.position;
 
-            //SetPosition(bc.GetDir);
-            StartCoroutine(CoMove());
+            SetPosition();
+            isGround = false;
         }
 
         public override void SetTargetObject(Transform target)
         {
-
+            
         }
 
         public override void SetTargetObject()
         {
+            Scanner scanner = GameManager.Instance.scanner;
+            target = scanner.targets[Random.Range(0, scanner.targets.Length)].transform;
 
-        }
-
-        public void SetPosition(Vector3 direction)
-        {
-            if (playerTr == null)
-                playerTr = GameManager.Instance.playerTr;
-
-            transform.position = playerTr.position + (direction * 2f);
-
-            endPos = playerTr.position + direction * 8f;
-            if (direction.x < 0f && transform.localScale.x > 0.0f) // flip
-                transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
-            else if (direction.x > 0f && transform.localScale.x < 0.0f)
-                transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
-        }
-
-        public void SetAngle(Vector3 direction)
-        {
-
-            transform.rotation = Quaternion.Euler(direction);
-        }
-
-        IEnumerator CoMove()
-        {
-            float timer = 0f;
-            Vector3 startPos = transform.position;
-            Debug.Log("hello");
-            while (timer < 1f)
+            if (target == null)
             {
-                timer += 1f * Time.deltaTime;
-                transform.position = Vector3.Lerp(startPos, endPos, timer);
-                yield return null;
+                int random = Random.Range(0, 360);
+                float x = Mathf.Cos(random * Mathf.Deg2Rad) * 5f;
+                float y = Mathf.Sin(random * Mathf.Deg2Rad) * 5f;
+
+                Vector2 pos = transform.position + new Vector3(x, y, 0);
+                target = new GameObject().transform;
+                target.position = pos;
             }
         }
-    }
 
+        public void SetPosition()
+        {
+            transform.position = endPos + Vector2.up * height;
+        }
+        public IEnumerator SelfDestruct()
+        {
+            yield return new WaitForSeconds(timeToSelfDestruct);
+            PoolManager.Instance.Push(GetComponent<Poolable>());
+        }
+    }
 }

@@ -18,6 +18,7 @@ namespace SwordEnchant.Projectile
 
         private Rigidbody2D rigidbody2D;
         public float startSpeed = 500;
+        private TrailRenderer trailRenderer;
 
         private bool isPoolable;
         public override void OnEnable()
@@ -29,6 +30,11 @@ namespace SwordEnchant.Projectile
 
             if (playerTr == null)
                 playerTr = GameManager.Instance.playerTr;
+
+            if (trailRenderer == null)
+                trailRenderer = GetComponent<TrailRenderer>();
+
+            trailRenderer.Clear();
 
         }
         // Start is called before the first frame update
@@ -50,8 +56,11 @@ namespace SwordEnchant.Projectile
         protected override void OnTriggerEnter2D(Collider2D other)
         {
             base.OnTriggerEnter2D(other);
+            if (type == ProjectileType.Pierce)
+                return;
+
             if (other.CompareTag("Enemy") && collided == false)
-            {
+            { 
                 collided = true;
                 Poolable poolable = GetComponent<Poolable>();
                 if (poolable.isUsing)
@@ -63,16 +72,17 @@ namespace SwordEnchant.Projectile
 
         public override void OnEnter()
         {
-            SoundClip clip = DataManager.SoundData().soundClips[(int)shootSound];
-            SoundManager.Instance.PlayEffectSound(clip, playerTr.position, clip.maxVolume);
-
-            collided = false;
+            base.OnEnter();
 
             SetPosition();
 
             SetTargetObject();
 
-            CalcDirectionRatation(-90f);
+            CalcDirectionRotation(-90f);
+
+            if (type == ProjectileType.Pierce)
+                StartCoroutine(SelfDestruct());
+            trailRenderer.Clear();
         }
 
         public override void SetTargetObject(Transform target)
@@ -97,6 +107,11 @@ namespace SwordEnchant.Projectile
         {
 
             transform.rotation = Quaternion.Euler(direction);
+        }
+        public IEnumerator SelfDestruct()
+        {
+            yield return new WaitForSeconds(timeToSelfDestruct);
+            PoolManager.Instance.Push(GetComponent<Poolable>());
         }
     }
 

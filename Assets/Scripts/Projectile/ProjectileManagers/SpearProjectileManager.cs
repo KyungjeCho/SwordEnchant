@@ -48,22 +48,7 @@ namespace SwordEnchant.Projectile
             Poolable poolable = PoolManager.Instance.Pop(DataManager.WeaponData().weaponClips[(int)weaponObject.weaponIndex].projectilePrefab);
 
             SpearController sc = poolable.GetComponent<SpearController>();
-            float degree;
-
-            if (GameManager.Instance.playerTr.GetComponent<BehaviourController>().GetDir.x > 0)
-                degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount - 90f;
-            else
-                degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount + 90f;
-
-            sc.SetPosition(MathHelper.DegreeToVector2(degree));
-
-            if (GameManager.Instance.playerTr.GetComponent<BehaviourController>().GetDir.x > 0)
-                degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount - 90f;
-            else
-                degree = 180f / (1f + weaponObject.Stats.count.ModifiedValue) * currentCount + 270f;
-            sc.SetAngle(new Vector3(0f, 0f, degree));
-
-
+            
             sc.OnEnter();
             //SoundManager.Instance.PlayOneShotEffect((int)SoundList.Zap_C_02, sc.transform.position, 1f);
 
