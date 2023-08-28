@@ -50,17 +50,15 @@ namespace SwordEnchant.Characters
                 !(-Mathf.Epsilon < v && v < Mathf.Epsilon))
             {
 
-                direction = new Vector2(h, v);
+                direction = new Vector2(h, v).normalized;
             }
 
 #if UNITY_ANDROID
             h = joystick.Horizontal;
             v = joystick.Vertical;
 
-            if (!(-0.5f < h && h < 0.5f) ||
-                !(-0.5f < v && v < 0.5f))
+            if (new Vector2(h, v).magnitude > 0.8f)
             {
-
                 direction = new Vector2(h, v);
             }
 #endif
