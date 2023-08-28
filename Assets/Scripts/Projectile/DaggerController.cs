@@ -1,92 +1,76 @@
-//using SwordEnchant.Managers;
-//using SwordEnchant.Util;
-//using SwordEnchant.WeaponSystem;
-//using System.Collections;
-//using System.Collections.Generic;
-//using System.Linq;
-//using UnityEngine;
+using SwordEnchant.Characters;
+using SwordEnchant.Managers;
+using SwordEnchant.Util;
+using SwordEnchant.WeaponSystem;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
-//namespace SwordEnchant.Projectile
-//{
-//    public class DaggerController : ProjectileController
-//    {
-//        private Transform playerTr;
+namespace SwordEnchant.Projectile
+{
+    public class DaggerController : ProjectileController
+    {
+        private Transform playerTr;
+        private Rigidbody2D myRigidbody2D;
 
-//        // Start is called before the first frame update
-//        void Start()
-//        {
-//            //parent = Resources.Load(PathName.WeaponObjectPath + "/" + GameObjectName.Dagger) as WeaponObject;
-//        }
+        // Start is called before the first frame update
+        public override void Awake()
+        {
+            base.Awake();
 
-//        // Update is called once per frame
-//        void Update()
-//        {
-            
-//        }
+            myRigidbody2D = GetComponent<Rigidbody2D>();
+            playerTr = GameManager.Instance.playerTr;
+        }
 
-//        public override void OnEnter()
-//        {
-//            parent = Resources.Load(PathName.WeaponObjectPath + "/" + GameObjectName.Dagger) as WeaponObject;
-//            base.OnEnter();
-//            collided = false;
-//            myRigidbody2D = GetComponent<Rigidbody2D>();
+        public override void OnEnter()
+        {
+            base.OnEnter();
 
-//            transform.position = GameManager.Instance.playerTr.position;
-//            if (target != null && parent != null)
-//            {
-//                Vector2 direction = (target.position - transform.position).normalized;
-//                float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-//                transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ -45f);
-//                myRigidbody2D.AddForce(direction * parent.Stats.speed.ModifiedValue);
-//            }
-//            else
-//            {
-//                Vector3 randDir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f).normalized;
-//                Vector2 direction = (randDir - transform.position).normalized;
-//                float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-//                transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ - 45f);
-//                myRigidbody2D.AddForce(direction * parent.Stats.speed.ModifiedValue);
-//            }
+            SetPosition();
 
-//            StartCoroutine(SelfDestruct());
-//        }
+            SetDirection();
 
-//        protected override void OnTriggerEnter2D(Collider2D other)
-//        {
-//            base.OnTriggerEnter2D(other);
+            myRigidbody2D.velocity = direction * stats.speed.ModifiedValue;
 
-//            if (other.tag == "Enemy")
-//            {
-//                collided = true;
+            float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
 
-//                PoolManager.Instance.Push(GetComponent<Poolable>());
-//            }
+            StartCoroutine(SelfDestruct());
+        }
 
-//        }
-//        public override void SetTargetObject(Transform target)
-//        {
-//            this.target = target;
-//        }
+        protected override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
 
-//        public override void SetTargetObject()
-//        {
-//            if (playerTr == null)
-//                playerTr = GameObject.Find(GameObjectName.Player).transform;
+            if (other.CompareTag(TagAndLayerKey.Enemy))
+            {
+                PoolManager.Instance.Push(GetComponent<Poolable>());
+            }
+        }
 
-//            Collider2D[] colliders = Physics2D.OverlapCircleAll(playerTr.position, 10f, LayerMask.GetMask(TagAndLayerKey.Enemy));
-            
-//            if (colliders.Length > 0)
-//            {
-//                Collider2D coll = colliders.OrderBy(x => Vector2.Distance(playerTr.position, x.transform.position)).ToList()[0];
-//                this.target = coll.gameObject.transform;
-//            }
-//        }
+        public void SetDirection()
+        {
+            BehaviourController bc = playerTr.GetComponent<BehaviourController>();
 
-//        public IEnumerator SelfDestruct()
-//        {
-//            yield return new WaitForSeconds(timeToSelfDestruct);
-//            PoolManager.Instance.Push(GetComponent<Poolable>());
-//        }
-//    }
+            Vector2 emptyDir = Vector2.zero;
 
-//}
+            if (bc.GetDir.x < -0f)
+                emptyDir += Vector2.left;
+            if (bc.GetDir.x > 0f)
+                emptyDir += Vector2.right;
+            if (bc.GetDir.y > 0f)
+                emptyDir += Vector2.up;
+            if (bc.GetDir.y < -0f)
+                emptyDir += Vector2.down;
+
+            emptyDir.Normalize();
+            direction = emptyDir;
+        }
+        public void SetPosition()
+        {
+            transform.position = playerTr.position;
+        }
+    }
+
+}

@@ -20,7 +20,7 @@ namespace SwordEnchant.Characters
         #region Properties
         private float h;
         private float v;
-        protected Vector2 direction = Vector2.left;
+        protected Vector2 direction = Vector2.right;
 
         public float GetH { get => h; }
         public float GetV { get => v; }
@@ -45,18 +45,24 @@ namespace SwordEnchant.Characters
             h = Input.GetAxis(InputKeyName.Horizontal);
             v = Input.GetAxis(InputKeyName.Vertical);
 
-            if (h > 0)
-                direction = new Vector2(1f, direction.y);
-            if (h < 0)
-                direction = new Vector2(-1f, direction.y);
-            
-            if (v > 0)
-                direction = new Vector2(direction.x, 1f);
-            if (v < 0)
-                direction = new Vector2(direction.x, -1f);
+            if (!(-Mathf.Epsilon < h && h < Mathf.Epsilon) ||
+                !(-Mathf.Epsilon < v && v < Mathf.Epsilon))
+            {
+
+                direction = new Vector2(h, v);
+            }
+            //if (h > 0)
+            //    direction = new Vector2(1f, direction.y);
+            //if (h < 0)
+            //    direction = new Vector2(-1f, direction.y);
+
+            //if (v > 0)
+            //    direction = new Vector2(direction.x, 1f);
+            //if (v < 0)
+            //    direction = new Vector2(direction.x, -1f);
 
 #if UNITY_ANDROID
-            
+
 #endif
 
 

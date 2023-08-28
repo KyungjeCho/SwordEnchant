@@ -56,14 +56,6 @@ namespace SwordEnchant.Projectile
             Poolable poolable = PoolManager.Instance.Pop(DataManager.WeaponData().weaponClips[(int)weaponObject.weaponIndex].projectilePrefab);
             ArrowController controller = poolable.GetComponent<ArrowController>();
 
-            //if (colliders.Length > 0)
-            //{
-            //    if (currentCount < colliders.Length)
-            //        controller.SetTargetObject(colliders[currentCount].transform);
-            //    else
-            //        controller.SetTargetObject(colliders[colliders.Length - 1].transform);
-            //}
-
             controller.Number = currentCount - 1;
             controller.OnEnter();
 

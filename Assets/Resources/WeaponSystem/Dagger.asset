@@ -10,31 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b413f8fa645ad747866653706a6ce7c, type: 3}
-  m_Name: ChainLightning
+  m_Name: Dagger
   m_EditorClassIdentifier: 
-  weaponIndex: 3
-  icon: {fileID: -766921868, guid: 4fbd40dda69c4a847a7d728765ee4e63, type: 3}
+  weaponIndex: 4
+  icon: {fileID: 21300000, guid: 3c4fb4eaad4dc5041a67346d221339df, type: 3}
   slotUI: {fileID: 0}
   stats:
     damage:
-      baseValue: 4
-      modifiedValue: 4
+      baseValue: 3
+      modifiedValue: 3
     speed:
-      baseValue: 800
-      modifiedValue: 800
+      baseValue: 20
+      modifiedValue: 20
     size:
-      baseValue: 0.5
-      modifiedValue: 0.5
+      baseValue: 1
+      modifiedValue: 1
     cooldown:
-      baseValue: 5
-      modifiedValue: 5
+      baseValue: 3
+      modifiedValue: 3
     count:
       baseValue: 1
       modifiedValue: 1
     criticalDamage:
-      baseValue: 2
-      modifiedValue: 2
+      baseValue: 0
+      modifiedValue: 0
     criticalProb:
-      baseValue: 0.01
-      modifiedValue: 0.01
-    weaponIndex: 3
+      baseValue: 0
+      modifiedValue: 0
+    weaponIndex: 4
