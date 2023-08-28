@@ -55,13 +55,13 @@ namespace SwordEnchant.Projectile
 
             Vector2 emptyDir = Vector2.zero;
 
-            if (bc.GetDir.x < -0f)
+            if (bc.GetDir.x < -0.5f)
                 emptyDir += Vector2.left;
-            if (bc.GetDir.x > 0f)
+            if (bc.GetDir.x > 0.5f)
                 emptyDir += Vector2.right;
-            if (bc.GetDir.y > 0f)
+            if (bc.GetDir.y > 0.5f)
                 emptyDir += Vector2.up;
-            if (bc.GetDir.y < -0f)
+            if (bc.GetDir.y < -0.5f)
                 emptyDir += Vector2.down;
 
             emptyDir.Normalize();

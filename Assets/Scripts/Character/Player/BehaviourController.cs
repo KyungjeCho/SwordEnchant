@@ -7,6 +7,7 @@ namespace SwordEnchant.Characters
     public class BehaviourController : MonoBehaviour
     {
         #region Variables
+        public FixedJoystick joystick;
         private List<GenericBehaviour> behaviours;
         private List<GenericBehaviour> overrideBehaviours; // 우선시 되는 동작
         private int currentBehaviour;
@@ -51,18 +52,17 @@ namespace SwordEnchant.Characters
 
                 direction = new Vector2(h, v);
             }
-            //if (h > 0)
-            //    direction = new Vector2(1f, direction.y);
-            //if (h < 0)
-            //    direction = new Vector2(-1f, direction.y);
-
-            //if (v > 0)
-            //    direction = new Vector2(direction.x, 1f);
-            //if (v < 0)
-            //    direction = new Vector2(direction.x, -1f);
 
 #if UNITY_ANDROID
+            h = joystick.Horizontal;
+            v = joystick.Vertical;
 
+            if (!(-0.5f < h && h < 0.5f) ||
+                !(-0.5f < v && v < 0.5f))
+            {
+
+                direction = new Vector2(h, v);
+            }
 #endif
 
 
