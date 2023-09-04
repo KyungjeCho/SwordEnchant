@@ -9,7 +9,8 @@ namespace SwordEnchant.WeaponSystem
     public class WeaponInventory : MonoBehaviour
     {
         public WeaponInventorySlot[] slots = new WeaponInventorySlot[6];
-
+        public WeaponObjectDB db;
+        public List<WeaponList> canUpgradeWeaponLists = new List<WeaponList>();
         private void Start()
         {
             if (GetFullSlotCount() > 0)
@@ -25,7 +26,12 @@ namespace SwordEnchant.WeaponSystem
                     slot.pm.gameObject.SetActive(true);
                 }
             }
+            for (int i = 0; i < db.weaponObjects.Length; i++)
+            {
+                canUpgradeWeaponLists.Add(db.weaponObjects[i].weaponIndex);
+            }
         }
+
         private void Update()
         {
             foreach (WeaponInventorySlot slot in slots)
@@ -79,6 +85,11 @@ namespace SwordEnchant.WeaponSystem
         {
             return Array.FindAll(slots, i => i.isEmpty == true).Length;
         }
+
+        //public bool CanAddOrUpgrade()
+        //{
+        //    if ()
+        //}
     }
 }
 

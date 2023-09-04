@@ -14,10 +14,11 @@ public class WeaponUpgradeDB : MonoSingleton<WeaponUpgradeDB>
     private void Awake()
     {
         db.Add(WeaponList.Sword, new SwordUpgrade());
-        //db.Add(WeaponList.Dagger, new DaggerUpgrade());
+        db.Add(WeaponList.Dagger, new DaggerUpgrade());
         db.Add(WeaponList.Bow, new BowUpgrade());
-
-        //db.Add(WeaponList.Shoes, new ShoesUpgrade());
+        db.Add(WeaponList.Boomerang, new BoomerangUpgrade());
+        db.Add(WeaponList.Flurry, new StarUpgrade());
+        
     }
     #endregion Unity Methods
 }

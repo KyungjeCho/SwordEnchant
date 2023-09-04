@@ -40,7 +40,6 @@ namespace SwordEnchant.UI
             {
                 inventoryObject.Slots[ii].UpdateSlot(inventoryObject.Slots[ii].weaponIndex, inventoryObject.Slots[ii].amount);
             }
-
         }
         #endregion Unity Methods
 

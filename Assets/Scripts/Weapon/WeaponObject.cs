@@ -22,7 +22,7 @@ namespace SwordEnchant.WeaponSystem
         private WeaponStats stats       = null;
         private WeaponClip  clip        = null;
         private float       cooldownTimer = 0.0f; // start : cooldown -> 0.0f
-
+        public int          maxGrade    = 5;
         public  int         Grade       { get ; set; }
         public WeaponStats  Stats       => stats;
 
