@@ -23,6 +23,7 @@ public class CameraRes : MonoBehaviour
     {
         top = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width * 0.5f, Screen.height));
         bottom = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width * 0.5f, 0f));
+
         left = Camera.main.ScreenToWorldPoint(new Vector2(0f, Screen.height * 0.5f));
         right = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height * 0.5f));
 

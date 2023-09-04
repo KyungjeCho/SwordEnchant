@@ -44,16 +44,16 @@ namespace SwordEnchant.Projectile
             // 카메라 모서리에 부딪쳤을 경우
             if (transform.position.y > CameraRes.top.y - space) // top
                 myRigidbody2D.velocity = new Vector2(
-                    myRigidbody2D.velocity.x, -myRigidbody2D.velocity.y);
+                    myRigidbody2D.velocity.x, -Mathf.Abs(myRigidbody2D.velocity.y));
             if (transform.position.y < CameraRes.bottom.y + space) // bottom
                 myRigidbody2D.velocity = new Vector2(
-                    myRigidbody2D.velocity.x, - myRigidbody2D.velocity.y);
+                    myRigidbody2D.velocity.x, Mathf.Abs(myRigidbody2D.velocity.y));
             if (transform.position.x < CameraRes.left.x + space)
                 myRigidbody2D.velocity = new Vector2(
-                    -myRigidbody2D.velocity.x, myRigidbody2D.velocity.y);
-            if (transform.position.x > CameraRes.left.x - space)
+                    Mathf.Abs(myRigidbody2D.velocity.x), myRigidbody2D.velocity.y);
+            if (transform.position.x > CameraRes.right.x - space)
                 myRigidbody2D.velocity = new Vector2(
-                    -myRigidbody2D.velocity.x, myRigidbody2D.velocity.y);
+                    -Mathf.Abs(myRigidbody2D.velocity.x), myRigidbody2D.velocity.y);
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)

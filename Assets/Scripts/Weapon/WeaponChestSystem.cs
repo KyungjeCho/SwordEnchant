@@ -59,19 +59,19 @@ namespace SwordEnchant.WeaponSystem
                     }
                     else
                     {
-                        index = Random.Range(0, db.weaponObjects.Length);
-                        while (inventory.IsContain(db.weaponObjects[index]))
-                        {
-                            index = Random.Range(0, db.weaponObjects.Length);
-                        }
-                        WeaponObject wo = db.weaponObjects[index];
-                        weaponIconImg.sprite = wo.icon;
+                        //index = Random.Range(0, db.weaponObjects.Length);
+                        //while (inventory.IsContain(db.weaponObjects[index]))
+                        //{
+                        //    index = Random.Range(0, db.weaponObjects.Length);
+                        //}
+                        //WeaponObject wo = db.weaponObjects[index];
+                        //weaponIconImg.sprite = wo.icon;
 
-                        inventory.AddWeapon(wo);
+                        //inventory.AddWeapon(wo);
 
-                        iconImg.sprite = wo.icon;
-                        weaponNameTxt.text = wo.Clip.weaponName;
-                        weaponContextTxt.text = wo.Clip.weaponName;
+                        //iconImg.sprite = wo.icon;
+                        //weaponNameTxt.text = wo.Clip.weaponName;
+                        //weaponContextTxt.text = wo.Clip.weaponName;
                     }
                     weaponInfoPanel.SetActive(true);
                     state = ChestOpenState.OPENNING;

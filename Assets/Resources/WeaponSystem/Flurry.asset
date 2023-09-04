@@ -13,24 +13,24 @@ MonoBehaviour:
   m_Name: Flurry
   m_EditorClassIdentifier: 
   weaponIndex: 3
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e841ce7ece663f54fbf1e08a29a671c1, type: 3}
   slotUI: {fileID: 0}
   stats:
     damage:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 10
+      modifiedValue: 10
     speed:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 15
+      modifiedValue: 15
     size:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 1
+      modifiedValue: 1
     cooldown:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 4
+      modifiedValue: 4
     count:
-      baseValue: 0
-      modifiedValue: 0
+      baseValue: 1
+      modifiedValue: 1
     criticalDamage:
       baseValue: 0
       modifiedValue: 0

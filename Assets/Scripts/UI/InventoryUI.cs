@@ -49,9 +49,9 @@ namespace SwordEnchant.UI
 
         public void OnPostUpdate(WeaponInventorySlot slot)
         {
-            slot.slotUI.transform.GetChild(1).GetComponent<Image>().sprite = slot.weaponIndex == WeaponList.None ? null : WeaponDataManager.Instance.GetWeaponObject(slot.weaponIndex).icon;
-            slot.slotUI.transform.GetChild(1).GetComponent<Image>().color = slot.weaponIndex == WeaponList.None ? new Color(1f, 1f, 1f, 0.4f) : new Color(1f, 1f, 1f, 1f);
-            slot.slotUI.GetComponentInChildren<TextMeshProUGUI>().text = slot.weaponIndex == WeaponList.None ? string.Empty : slot.amount.ToString("n0");
+            slot.slotUI.transform.GetChild(0).GetComponent<Image>().sprite = slot.weaponIndex == WeaponList.None ? null : WeaponDataManager.Instance.GetWeaponObject(slot.weaponIndex).icon;
+            slot.slotUI.transform.GetChild(0).GetComponent<Image>().color = slot.weaponIndex == WeaponList.None ? new Color(1f, 1f, 1f, 0f) : new Color(1f, 1f, 1f, 1f);
+            //slot.slotUI.GetComponentInChildren<TextMeshProUGUI>().text = slot.weaponIndex == WeaponList.None ? string.Empty : slot.amount.ToString("n0");
         }
 
         protected void AddEvent(GameObject go, EventTriggerType type, UnityAction<BaseEventData> action)

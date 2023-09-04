@@ -14,8 +14,13 @@ namespace SwordEnchant.Managers
 
         public Scanner scanner;
 
+        public FixedJoystick joystick;
+
         private int gold = 0;
         private int soul = 0;
+        private float exp = 0;
+        private float maxExp = 3;
+        private int level = 1;
 
         private float elapsedTime = 4 * 60f + 45f;
         #endregion Variables
@@ -24,6 +29,26 @@ namespace SwordEnchant.Managers
         public int Gold => gold;
         public int Soul => soul;
 
+        public float MaxExp => maxExp;
+        public float Exp 
+        {
+            get
+            {
+                return exp;
+            }
+            set
+            {
+                exp += value;
+                
+                if (exp > maxExp)
+                {
+                    level++;
+                    exp -= maxExp;
+                    maxExp *= 1.5f;
+                }
+                UIManager.Instance.UpdateExpBar();
+            }
+        }
         public float ElapsedTime => elapsedTime;
         #endregion Properties
 
@@ -33,6 +58,9 @@ namespace SwordEnchant.Managers
             BattleEventBus.Publish(BattleEventType.START);
 
             scanner = GetComponent<Scanner>();
+
+            if (joystick == null)
+                joystick = GameObject.Find("Canvas/Fixed Joystick")?.GetComponent<FixedJoystick>();
         }
         private void OnEnable()
         {
@@ -81,20 +109,28 @@ namespace SwordEnchant.Managers
             //SoundManager.Instance.PlayBGM((int)SoundList.Cleanup_29);
 
             playerTr.GetComponent<CharacterStat>().Initialize();
+
+            joystick.gameObject.SetActive(true);
         }
 
         private void RestartBattle()
         {
             Time.timeScale = 1.0f;
+
+            joystick.gameObject.SetActive(true);
         }
 
         private void PauseBattle()
         {
             Time.timeScale = 0.0f;
+
+            joystick.gameObject.SetActive(false);
         }
         private void Die()
         {
             SaveData();
+
+            joystick.gameObject.SetActive(false);
         }
         private void QuitBattle()
         {
@@ -103,6 +139,8 @@ namespace SwordEnchant.Managers
             Destroy(GameObject.Find($"@Pool_Root"));
 
             playerTr.GetComponent<CharacterStat>().isInitialized = false;
+
+            joystick.gameObject.SetActive(false);
         }
         private void FinishBattle()
         {
@@ -113,6 +151,8 @@ namespace SwordEnchant.Managers
             Destroy(GameObject.Find($"@Pool_Root"));
 
             playerTr.GetComponent<CharacterStat>().isInitialized = false;
+
+            joystick.gameObject.SetActive(false);
         }
 
         public void SaveData()

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 namespace SwordEnchant.UI
 {
     public class WeaponInventoryUI : InventoryUI
+
     {
         public GameObject[] staticSlots = null;
 
@@ -16,13 +17,9 @@ namespace SwordEnchant.UI
             {
                 GameObject slotGO = staticSlots[ii];
 
-                AddEvent(slotGO, EventTriggerType.PointerClick, (data) => { OnClick(slotGO, (PointerEventData)data); });
-
                 inventoryObject.Slots[ii].slotUI = slotGO;
                 slotUIs.Add(slotGO, inventoryObject.Slots[ii]);
             }
-            
         }
     }
-
 }

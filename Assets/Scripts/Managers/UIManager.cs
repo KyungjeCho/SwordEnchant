@@ -35,6 +35,15 @@ namespace SwordEnchant.Managers
         #endregion Lobby Scene
 
         #region Battle Scene
+        #region Exp Bar
+        [Header("--- Exp Bar ---")]
+        public Image expBarImg;
+
+        public void UpdateExpBar()
+        {
+            expBarImg.fillAmount = GameManager.Instance.Exp / GameManager.Instance.MaxExp;
+        }
+        #endregion Exp Bar
         #region Option Controll Panel
         [Header("--- Option Controll Panel ---")]
         public GameObject OptionPanelObj;
