@@ -20,8 +20,8 @@ namespace SwordEnchant.Managers
     {
         private Transform monsterRoot = null;
         private float timer = 0.0f;
-        private float duration = 0.0f;
-        private int spawnCount = 1;
+        public float duration;
+        public int spawnCount = 1;
 
 
         public List<TimeDuration> timeToDur = new List<TimeDuration>();
@@ -56,11 +56,13 @@ namespace SwordEnchant.Managers
             timeList.Add(18);
             timeList.Add(20);
 
+            SpawnEventBus.Subscribe(timeList[0], Time0min);
             SpawnEventBus.Subscribe(timeList[1], Time1min);
         }
 
         private void OnDisable()
         {
+            SpawnEventBus.Unsubscribe(timeList[0], Time0min);
             SpawnEventBus.Unsubscribe(timeList[1], Time1min);
         }
         void Start()
@@ -85,49 +87,34 @@ namespace SwordEnchant.Managers
             playerTr = GameObject.Find("Player").transform;
 
             duration = timeToDur[0].duration;
+            //duration = 0.5f;
             spawnObject = monsterPrefabs[0];
         }
 
         private void Update()
         {
-            //int i = 0;
-            //foreach(TimeDuration td in timeToDur)
-            //{
-            //    if (GameManager.Instance.ElapsedTime > td.time)
-            //    {
-            //        spawnObject = monsterPrefabs[i];
-            //        duration = td.duration;
-            //        i++;
-            //    }
-            //    else
-            //    {
-            //        break;
-            //    }
-            //}
-            for (int ii = timeList.Count - 1; ii >= 0; ii--)
+
+            for (int i = 0; i < timeList.Count; i++)
             {
-                if (timeList[ii] < GameManager.Instance.ElapsedTime)
+                if (GameManager.Instance.ElapsedTime > timeList[i] * 60)
                 {
-                    SpawnEventBus.Publish(timeList[ii]);
-                    break;
+                    SpawnEventBus.Publish(timeList[i]);
                 }
             }
-
             timer += Time.deltaTime;
             if (timer >= duration)
             {
-                for(int i = 0; i < spawnCount; i++)
+                for (int i = 0; i < spawnCount; i++)
                     MonsterSpawn();
 
                 timer = 0f;
             }
-
-
         }
 
         public void MonsterSpawn()
         {
-            Poolable po = PoolManager.Instance.Pop(spawnObject);
+            int index = Random.Range(0, monsterPrefabs.Count);
+            Poolable po = PoolManager.Instance.Pop(monsterPrefabs[index]);
 
             po.gameObject.GetComponent<EnemyController>().ResetHealth();
             
@@ -141,32 +128,34 @@ namespace SwordEnchant.Managers
         #region Time Events
         public void Time0min()
         {
-            duration = 4f;
+            duration = 2f;
 
             spawnObject = monsterPrefabs[0];
             spawnCount = 1;
         }
         public void Time1min()
         {
-            duration = 3f;
+            duration = 1.5f;
+            spawnObject = monsterPrefabs[1];
         }
 
         public void Time5min()
         {
-            duration = 3f;
+            duration = 1f;
 
             spawnObject = monsterPrefabs[1];
-            spawnCount = 3;
+            spawnCount = 2;
         }
 
         public void Time7min()
         {
+            duration = 0.5f;
 
         }
 
         public void Time9min()
         {
-
+            spawnCount = 3;
         }
 
         public void Time10min()

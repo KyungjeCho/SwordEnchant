@@ -33,7 +33,7 @@ namespace SwordEnchant.Projectile
         {
             transform.localScale = Vector3.one * weaponObject.Stats.size.ModifiedValue;
             SoundClip clip = DataManager.SoundData().soundClips[(int)shootSound];
-            SoundManager.Instance.PlayOneShotEffect((int)shootSound, GameManager.Instance.playerTr.position, clip.maxVolume);
+            SoundManager.Instance.PlayEffectSound(DataManager.SoundData().soundClips[(int)shootSound]);
         }
 
         #endregion Vritual Methods

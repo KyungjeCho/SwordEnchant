@@ -44,6 +44,7 @@ namespace SwordEnchant.Managers
             expBarImg.fillAmount = GameManager.Instance.Exp / GameManager.Instance.MaxExp;
         }
         #endregion Exp Bar
+
         #region Option Controll Panel
         [Header("--- Option Controll Panel ---")]
         public GameObject OptionPanelObj;
@@ -51,10 +52,8 @@ namespace SwordEnchant.Managers
         public Button OptionReturnBtn;
         public Button LobbyBtn;
 
-
         public Slider BGMVolSlider;
         public Slider EffectVolSlider;
-        public Slider UIVolSlider;
 
         public void OpenOptionPanel()
         {
@@ -63,6 +62,7 @@ namespace SwordEnchant.Managers
             BattleEventBus.Publish(BattleEventType.PAUSE);
             SoundManager.Instance.Stop(true);
             InitSliders();
+            GameManager.Instance.joystick.gameObject.SetActive(false);
         }
 
         public void CloseOptionPanel()
@@ -71,21 +71,20 @@ namespace SwordEnchant.Managers
                 OptionPanelObj.SetActive(false);
             BattleEventBus.Publish(BattleEventType.RESTART);
 
-            //SoundManager.Instance.PlayBGM((int)SoundList.Cleanup_29);
+            SoundManager.Instance.PlayBGM((int)SoundList.TheFinalBattle);
             UpdateSliders();
+            GameManager.Instance.joystick.gameObject.SetActive(true);
         }
 
         public void InitSliders()
         {
             BGMVolSlider.value = SoundManager.Instance.GetBGMVolume(true);
             EffectVolSlider.value = SoundManager.Instance.GetEffectVolume(true);
-            UIVolSlider.value = SoundManager.Instance.GetUIVolume(true);
         }
         public void UpdateSliders()
         {
             SoundManager.Instance.SetBGMVolume(BGMVolSlider.value);
             SoundManager.Instance.SetEffectVolume(EffectVolSlider.value);
-            SoundManager.Instance.SetUIVolume(UIVolSlider.value);
         }
         #endregion Option Controll Panel
 
@@ -246,6 +245,18 @@ namespace SwordEnchant.Managers
         }
         #endregion Blood Effect Image
 
+        #region Weapon Add or Upgrade
+        [Header("--- 무기 추가 및 강화 패널 ---")]
+        public GameObject WeaponAddUpgradePanel;
+
+        public void OpenWeaponAddUpgradePanel()
+        {
+            WeaponAddUpgradePanel.gameObject.SetActive(true);
+
+            UpgradeUI upgrade = WeaponAddUpgradePanel.GetComponent<UpgradeUI>();
+            upgrade.UpdateUI();
+        }
+        #endregion Weapon Add or Upgrade
 
         #endregion Battle Scene
 

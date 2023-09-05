@@ -128,7 +128,8 @@ namespace SwordEnchant.Characters
                 if (rand <= item.dropRate)
                 {
                     Poolable po = PoolManager.Instance.Pop(item.dropItemObj);
-                    po.transform.position = transform.position;
+                    Vector3 randomPos = UnityEngine.Random.insideUnitCircle;
+                    po.transform.position = transform.position + randomPos;
                 }
             }
 

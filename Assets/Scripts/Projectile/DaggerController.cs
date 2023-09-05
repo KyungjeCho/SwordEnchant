@@ -34,7 +34,7 @@ namespace SwordEnchant.Projectile
             myRigidbody2D.velocity = direction * stats.speed.ModifiedValue;
 
             float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ - 45f);
 
             StartCoroutine(SelfDestruct());
         }

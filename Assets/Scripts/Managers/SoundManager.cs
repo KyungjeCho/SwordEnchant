@@ -106,10 +106,12 @@ namespace SwordEnchant.Managers
                     this.effect_audios[i].outputAudioMixerGroup = mixer.FindMatchingGroups(EffectGroupName)[0];
                 }
             }
-
-            VolumeInit();
         }
 
+        private void Start()
+        {
+            VolumeInit();
+        }
         public void ResetAllVolume()
         {
             SetBGMVolume(1f);
@@ -196,6 +198,7 @@ namespace SwordEnchant.Managers
         {
             if (this.mixer != null)
             {
+                
                 this.mixer.SetFloat(BGMVolumeParam, GetBGMVolume());
                 this.mixer.SetFloat(EffectVolumeParam, GetEffectVolume());
                 this.mixer.SetFloat(UIVolumeParam, GetUIVolume());
@@ -224,7 +227,6 @@ namespace SwordEnchant.Managers
 
         void PlayAudioSourceAtPoint(SoundClip clip, Vector3 position, float volume)
         {
-            Debug.Log(clip.GetClip());
             AudioSource.PlayClipAtPoint(clip.GetClip(), position, volume);
         }
 

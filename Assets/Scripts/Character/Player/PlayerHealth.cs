@@ -72,8 +72,7 @@ namespace SwordEnchant.Characters
             }
 
             // 이펙트 사운드 출력
-            SoundManager.Instance.PlayOneShotEffect((int)SoundList.Hurt, transform.position, 1f);
-
+            SoundManager.Instance.PlayEffectSound(DataManager.SoundData().soundClips[(int)SoundList.Hurt]);
             UpdateHealthBar();
 
             if (IsAlive != true)

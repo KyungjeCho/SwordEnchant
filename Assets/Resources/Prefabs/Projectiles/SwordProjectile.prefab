@@ -227,4 +227,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e269379d723755044bc0e4ac8c6c4b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 2, y: 2}
+  boxSize: {x: 3, y: 3}

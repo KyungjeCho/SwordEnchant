@@ -97,7 +97,7 @@ namespace SwordEnchant.Characters
             float totalDamage = Formula.TotalDamage(damage, 1f, stats.defence, Formula.IsCritical(criticalProb));
             stats.health -= totalDamage;
 
-            SoundManager.Instance.PlayOneShotEffect((int)soundIndex, GameManager.Instance.playerTr.position, 1f);
+            SoundManager.Instance.PlayEffectSound(DataManager.SoundData().soundClips[(int)soundIndex]);
             UIManager.Instance.CreateDamageText(transform.position, -(int)totalDamage);
             
             stateMachine.ChangeState<KnockbackState>();

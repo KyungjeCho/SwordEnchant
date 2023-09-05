@@ -17,19 +17,21 @@ namespace SwordEnchant.Item
         #region Variables
 
         private Transform playerTr;
-        #endregion Variables
+
+        private bool isUsed = false;
+        #endregion Variables 
 
         #region Unity Methods
         // Start is called before the first frame update
         protected virtual void Start()
         {
             playerTr = GameManager.Instance.playerTr;
-
-            //transform.DOLocalMoveY(transform.position.y + 1f, 1.0f)
-            //    .SetLoops(-1, LoopType.Yoyo)
-            //    .SetEase(Ease.InOutSine);
         }
 
+        private void OnEnable()
+        {
+            isUsed = false;
+        }
         // Update is called once per frame
         void Update()
         {
@@ -40,10 +42,11 @@ namespace SwordEnchant.Item
         #region Virtual Methods
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "Player")
+            if (collision.tag == "Player" && isUsed == false)
             {
                 // Use
                 Use();
+                isUsed = true;
 
                 // Destroy
                 Poolable poolable = GetComponent<Poolable>();

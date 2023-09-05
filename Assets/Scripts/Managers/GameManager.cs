@@ -19,7 +19,7 @@ namespace SwordEnchant.Managers
         private int gold = 0;
         private int soul = 0;
         private float exp = 0;
-        private float maxExp = 3;
+        private float maxExp = 10;
         private int level = 1;
 
         private float elapsedTime = 4 * 60f + 45f;
@@ -30,25 +30,7 @@ namespace SwordEnchant.Managers
         public int Soul => soul;
 
         public float MaxExp => maxExp;
-        public float Exp 
-        {
-            get
-            {
-                return exp;
-            }
-            set
-            {
-                exp += value;
-                
-                if (exp > maxExp)
-                {
-                    level++;
-                    exp -= maxExp;
-                    maxExp *= 1.5f;
-                }
-                UIManager.Instance.UpdateExpBar();
-            }
-        }
+        public float Exp => exp;
         public float ElapsedTime => elapsedTime;
         #endregion Properties
 
@@ -61,6 +43,8 @@ namespace SwordEnchant.Managers
 
             if (joystick == null)
                 joystick = GameObject.Find("Canvas/Fixed Joystick")?.GetComponent<FixedJoystick>();
+
+            UIManager.Instance.UpdateExpBar();
         }
         private void OnEnable()
         {
@@ -106,7 +90,8 @@ namespace SwordEnchant.Managers
             LoadData();
 
             BattleEventBus.Publish(BattleEventType.RESTART);
-            //SoundManager.Instance.PlayBGM((int)SoundList.Cleanup_29);
+            //
+            SoundManager.Instance.PlayBGM((int)SoundList.TheFinalBattle);
 
             playerTr.GetComponent<CharacterStat>().Initialize();
 
@@ -179,7 +164,21 @@ namespace SwordEnchant.Managers
             UIManager.Instance.UpdateSoul();
         }
 
-        
+        public void GetExp(float amount)
+        {
+            exp += amount;
+
+            if (exp > maxExp)
+            {
+                level++;
+                exp -= maxExp;
+                maxExp *= 2f;
+
+                UIManager.Instance.OpenWeaponAddUpgradePanel();
+                BattleEventBus.Publish(BattleEventType.PAUSE);
+            }
+            UIManager.Instance.UpdateExpBar();
+        }
     }
 }
 

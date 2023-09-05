@@ -1,8 +1,10 @@
+using SwordEnchant.EventBus;
 using SwordEnchant.Managers;
 using SwordEnchant.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,8 +79,9 @@ public class UpgradeUI : MonoBehaviour
                 int index = Random.Range(0, emptyWeaponList.Count);
 
                 weaponLists[i] = emptyWeaponList[index];
-                Debug.Log(weaponLists[i]);
+                
                 upgradeBtn[i].transform.GetChild(0).GetComponent<Image>().sprite = WeaponDataManager.Instance.GetWeaponObject(weaponLists[i]).icon;
+                upgradeBtn[i].transform.GetChild(1).GetComponent<TMP_Text>().text = DataManager.WeaponData().weaponClips[(int)weaponLists[i]].korName;
 
                 selectWeaponCount++;
             }
@@ -118,5 +121,7 @@ public class UpgradeUI : MonoBehaviour
         }
         inventoryUI.UpdateInventoryUI();
         upgradeUI.gameObject.SetActive(false);
+
+        BattleEventBus.Publish(BattleEventType.RESTART);
     }
 }

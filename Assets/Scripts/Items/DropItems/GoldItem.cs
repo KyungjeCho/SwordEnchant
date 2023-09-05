@@ -15,12 +15,6 @@ namespace SwordEnchant.Item
 
         #endregion Variables
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public override void Use()
         {
             int totalGold = Random.Range(minGold, maxGold);

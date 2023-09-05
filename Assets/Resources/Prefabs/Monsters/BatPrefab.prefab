@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7688323684050531147}
   - component: {fileID: 7688323684050531146}
   - component: {fileID: 7688323684050531145}
+  - component: {fileID: 8670832353140399293}
   m_Layer: 8
   m_Name: BatPrefab
   m_TagString: Enemy
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2032604263
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1668835950, guid: f87ede0abbc1edd488bff351a86bf6fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -144,12 +145,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: 2
   dropItems:
-  - dropItemObj: {fileID: 3970167639548550179, guid: 135a9372c248bbe47a96781502019385, type: 3}
+  - dropItemObj: {fileID: 109122944230606945, guid: 60b345b21b952864cae90b6e43f2f427, type: 3}
     dropRate: 1
   - dropItemObj: {fileID: 3531942731690884174, guid: 2396415fb440a6c4892b58c035f3eb6f, type: 3}
     dropRate: 0.1
   - dropItemObj: {fileID: 2058827650147887674, guid: 0ee6014107ae0da46ae555fbb93c6491, type: 3}
-    dropRate: 0.1
+    dropRate: 0.01
   _elapsedTime: 0
   attackCooldown: 1
   soundIndex: 1
@@ -182,3 +183,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUsing: 0
+--- !u!114 &8670832353140399293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7688323684050531150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a65c6bbf55a99c4e9b1ba4fe50a067b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashTime: 0.25

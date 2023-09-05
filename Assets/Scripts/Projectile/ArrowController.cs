@@ -82,7 +82,11 @@ namespace SwordEnchant.Projectile
             }
             else
             {
-                target = scanner.targets[Random.Range(0, scanner.targets.Length)].transform;
+                
+                if (scanner.targets.Length != 0)
+                    target = scanner.targets[Random.Range(0, scanner.targets.Length)].transform;
+                else
+                    target = null;
             }
         }
         public void SetPosition()
