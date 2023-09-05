@@ -96,7 +96,7 @@ namespace SwordEnchant.Managers
 
         public WeaponObject GetWeaponObject(WeaponList index)
         {
-            foreach(var weaponObject in weaponObjectDB)
+            foreach(WeaponObject weaponObject in weaponObjectDB)
             {
                 if (weaponObject == null)
                     continue;

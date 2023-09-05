@@ -113,12 +113,14 @@ public class UpgradeUI : MonoBehaviour
         else
         {
             WeaponObject weaponObject = WeaponDataManager.Instance.GetWeaponObject(weaponLists[num]);
+
             if (weaponObject.Grade >= weaponObject.maxGrade)
                 return;
 
             weaponObject.Grade += 1;
             upgradeDB.db[weaponLists[num]].Upgrade(weaponObject.Grade, weaponObject.Stats);
         }
+
         inventoryUI.UpdateInventoryUI();
         upgradeUI.gameObject.SetActive(false);
 

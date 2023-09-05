@@ -32,23 +32,50 @@ public class BasePlayerStat
         switch (attr)
         {
             case PlayerStatAttribute.MaxHp:
-                return PlayerPrefs.GetInt(PlayerPrefsKey.MaxHp);
+                if (PlayerPrefs.HasKey(PlayerPrefsKey.MaxHp))
+                    return PlayerPrefs.GetInt(PlayerPrefsKey.MaxHp);
+                else
+                    return 0;
             case PlayerStatAttribute.Defence:
-                return PlayerPrefs.GetInt(PlayerPrefsKey.Defence);
+                if (PlayerPrefs.HasKey(PlayerPrefsKey.Defence))
+                    return PlayerPrefs.GetInt(PlayerPrefsKey.Defence);
+                else
+                    return 0;
             case PlayerStatAttribute.Damage:
-                return PlayerPrefs.GetInt(PlayerPrefsKey.Damage);
+                if (PlayerPrefs.HasKey(PlayerPrefsKey.Damage))
+                    return PlayerPrefs.GetInt(PlayerPrefsKey.Damage);
+                else
+                    return 0;
             case PlayerStatAttribute.Size:
-                return PlayerPrefs.GetInt(PlayerPrefsKey.Size);
+                if (PlayerPrefs.HasKey(PlayerPrefsKey.Size))
+                    return PlayerPrefs.GetInt(PlayerPrefsKey.Size);
+                else
+                    return 0;
             case PlayerStatAttribute.Speed:
-                return PlayerPrefs.GetInt(PlayerPrefsKey.Speed);
+                if (PlayerPrefs.HasKey(PlayerPrefsKey.Speed))
+                    return PlayerPrefs.GetInt(PlayerPrefsKey.Speed);
+                else
+                    return 0;
             case PlayerStatAttribute.Cooldown:
-                return PlayerPrefs.GetInt(PlayerPrefsKey.Cooldown);
+                if (PlayerPrefs.HasKey(PlayerPrefsKey.Cooldown))
+                    return PlayerPrefs.GetInt(PlayerPrefsKey.Cooldown);
+                else
+                    return 0;
             case PlayerStatAttribute.Luck:
-                return PlayerPrefs.GetInt(PlayerPrefsKey.Luck);
+                if (PlayerPrefs.HasKey(PlayerPrefsKey.Luck))
+                    return PlayerPrefs.GetInt(PlayerPrefsKey.Luck);
+                else
+                    return 0;
             case PlayerStatAttribute.CriticalProb:
-                return PlayerPrefs.GetInt(PlayerPrefsKey.CriticalProb);
+                if (PlayerPrefs.HasKey(PlayerPrefsKey.CriticalProb))
+                    return PlayerPrefs.GetInt(PlayerPrefsKey.CriticalProb);
+                else
+                    return 0;
             case PlayerStatAttribute.CriticalDamage:
-                return PlayerPrefs.GetInt(PlayerPrefsKey.CriticalDamage);
+                if (PlayerPrefs.HasKey(PlayerPrefsKey.CriticalDamage))
+                    return PlayerPrefs.GetInt(PlayerPrefsKey.CriticalDamage);
+                else
+                    return 0;
         }
 
         return 0;

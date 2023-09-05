@@ -198,6 +198,9 @@ namespace SwordEnchant.Managers
         {
             if (GameOverPanelObj != null)
                 GameOverPanelObj.SetActive(true);
+
+            GameManager.Instance.joystick.gameObject.SetActive(false);
+            StopAllCoroutines();
         }
         #endregion Game Over Panel
         #region Timer 

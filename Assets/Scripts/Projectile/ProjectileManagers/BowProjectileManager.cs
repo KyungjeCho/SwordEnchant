@@ -26,8 +26,10 @@ namespace SwordEnchant.Projectile
 
             if (weaponObject == null)
             {
-                weaponObject = Resources.Load("WeaponSystem/Sword") as WeaponObject;
+                weaponObject = Resources.Load("WeaponSystem/Bow") as WeaponObject;
+                
             }
+            DataManager.WeaponData().weaponClips[(int)weaponObject.weaponIndex].PreLoad();
         }
 
         public override void Shot()

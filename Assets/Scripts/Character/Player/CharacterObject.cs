@@ -24,7 +24,8 @@ public class CharacterObject : ScriptableObject
             return;
 
         clip = DataManager.CharacterData().characterClips[(int)characterIndex];
-        stats = new CharacterStats(characterIndex);
         clip.PreLoad();
+        stats = new CharacterStats(characterIndex);
+        
     }
 }

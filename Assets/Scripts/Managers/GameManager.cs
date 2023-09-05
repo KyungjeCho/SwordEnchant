@@ -89,6 +89,8 @@ namespace SwordEnchant.Managers
             gold = 0;
             LoadData();
 
+            GameManager.Instance.joystick.gameObject.SetActive(true);
+
             BattleEventBus.Publish(BattleEventType.RESTART);
             //
             SoundManager.Instance.PlayBGM((int)SoundList.TheFinalBattle);

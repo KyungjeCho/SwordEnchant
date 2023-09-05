@@ -78,7 +78,7 @@ namespace SwordEnchant.Projectile
             else
             {
                 Vector3 randDir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f).normalized;
-                direction = (randDir - transform.position).normalized;
+                direction = (randDir + transform.position).normalized;
             }
 
             rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

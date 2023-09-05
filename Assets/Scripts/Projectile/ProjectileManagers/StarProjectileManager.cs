@@ -27,6 +27,7 @@ namespace SwordEnchant.Projectile
             {
                 weaponObject = Resources.Load("WeaponSystem/Sword") as WeaponObject;
             }
+            DataManager.WeaponData().weaponClips[(int)weaponObject.weaponIndex].PreLoad();
         }
 
         public override void Shot()

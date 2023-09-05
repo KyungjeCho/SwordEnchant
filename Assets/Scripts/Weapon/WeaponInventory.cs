@@ -85,11 +85,6 @@ namespace SwordEnchant.WeaponSystem
         {
             return Array.FindAll(slots, i => i.isEmpty == true).Length;
         }
-
-        //public bool CanAddOrUpgrade()
-        //{
-        //    if ()
-        //}
     }
 }
 

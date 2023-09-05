@@ -38,6 +38,7 @@ namespace SwordEnchant.Data
 
         public ModifiableFloat(Action<ModifiableFloat> method = null)
         {
+            modifiers = new List<IModifier<float>>();
             ModifiedValue = baseValue;
             RegisterModEvent(method);
         }
@@ -73,6 +74,10 @@ namespace SwordEnchant.Data
 
         public void AddModifier(IModifier<float> modifier)
         {
+            Debug.Log("Input : " + (modifier == null));
+            Debug.Log("Member : " + (modifiers == null));
+            if (modifiers == null)
+                modifiers = new List<IModifier<float>>();
             modifiers.Add(modifier);
             UpdateModifiedValue();
         }

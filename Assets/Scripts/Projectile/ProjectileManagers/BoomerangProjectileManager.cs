@@ -27,7 +27,9 @@ namespace SwordEnchant.Projectile
             if (weaponObject == null)
             {
                 weaponObject = Resources.Load("WeaponSystem/Boomerang") as WeaponObject;
+                
             }
+            DataManager.WeaponData().weaponClips[(int)weaponObject.weaponIndex].PreLoad();
         }
 
         public override void Shot()
