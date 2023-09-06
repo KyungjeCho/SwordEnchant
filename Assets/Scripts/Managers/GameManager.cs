@@ -75,6 +75,9 @@ namespace SwordEnchant.Managers
             elapsedTime += Time.fixedDeltaTime;
 
             UIManager.Instance.UpdateTimer();
+
+            if (elapsedTime > 20 * 60)
+                BattleEventBus.Publish(BattleEventType.FINISH);
         }
 
         #endregion Unity Methods
@@ -129,15 +132,10 @@ namespace SwordEnchant.Managers
         }
         private void FinishBattle()
         {
+            Time.timeScale = 0.0f;
             SaveData();
 
-            // 로비 화면으로 로딩
-            SceneManager.LoadScene("LobbyScene");
-            Destroy(GameObject.Find($"@Pool_Root"));
-
-            playerTr.GetComponent<CharacterStat>().isInitialized = false;
-
-            joystick.gameObject.SetActive(false);
+            UIManager.Instance.OpenGameClearPanel();
         }
 
         public void SaveData()

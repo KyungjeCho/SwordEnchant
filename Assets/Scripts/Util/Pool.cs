@@ -7,21 +7,21 @@ namespace SwordEnchant.Util
 {
     public class Pool
     {
-        public GameObject Original { get; private set; }
-        public Transform Root { get; set; }
+        public GameObject original { get; private set; }
+        public Transform root { get; set; }
 
-        public int MaxPoolSize { get; private set; }
+        public int maxPoolSize { get; private set; }
 
         private Stack<Poolable> poolStack = new Stack<Poolable>();
 
         public void Init(GameObject original, int poolSize = 10)
         {
-            Original = original;
-            MaxPoolSize = poolSize;
-            Root = new GameObject().transform;
-            Root.name = $"{original.name}_Root";
+            this.original = original;
+            maxPoolSize = poolSize;
+            root = new GameObject().transform;
+            root.name = $"{original.name}_Root";
 
-            for (int i = 0; i < MaxPoolSize; i++)
+            for (int i = 0; i < maxPoolSize; i++)
             {
                 Push(Create());
             }
@@ -29,8 +29,8 @@ namespace SwordEnchant.Util
 
         private Poolable Create()
         {
-            GameObject go = Object.Instantiate<GameObject>(Original);
-            go.name = Original.name;
+            GameObject go = Object.Instantiate<GameObject>(original);
+            go.name = original.name;
 
             if (go.GetComponent<Poolable>() == null)
                 return go.AddComponent<Poolable>();
@@ -43,7 +43,7 @@ namespace SwordEnchant.Util
             if (poolable == null)
                 return;
 
-            poolable.transform.parent = Root;
+            poolable.transform.parent = root;
 
             poolable.gameObject.SetActive(false);
             poolable.isUsing = false;

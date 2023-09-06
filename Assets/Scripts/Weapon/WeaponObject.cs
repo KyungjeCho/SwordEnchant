@@ -60,7 +60,7 @@ namespace SwordEnchant.WeaponSystem
             if (clip.projectilePrefab == null || PoolManager.Instance == null)
                 return;
 
-            if (PoolManager.Instance.isContain(clip.projectilePrefab) == false)
+            if (PoolManager.Instance.IsContain(clip.projectilePrefab) == false)
                 PoolManager.Instance.CreatePool(clip.projectilePrefab);
 
         }

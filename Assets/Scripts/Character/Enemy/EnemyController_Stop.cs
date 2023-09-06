@@ -35,7 +35,7 @@ namespace SwordEnchant.Characters
         }
         public override void CalculateDirection()
         {
-            _direction = Vector3.zero;
+            direction = Vector3.zero;
         }
         #endregion Move Method
 

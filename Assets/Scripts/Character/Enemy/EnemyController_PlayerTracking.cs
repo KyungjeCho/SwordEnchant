@@ -29,7 +29,7 @@ namespace SwordEnchant.Characters
             stateMachine.AddState(new KnockbackState());
 
             _rigidbody2d = GetComponent<Rigidbody2D>();
-            _elapsedTime = attackCooldown; // 시작하자마자 쿨타임 채우기
+            _elapsedTime = attackCooldown; 
         }
         protected override void Update()
         {
@@ -68,18 +68,18 @@ namespace SwordEnchant.Characters
         public override void Move()
         {
             CalculateDirection();
-            //_controller.Move(-_direction * 1 * Time.deltaTime);
-            _rigidbody2d.velocity = -_direction * stats.speed * Time.deltaTime * 100;
 
-            if (_direction.x < 0)
+            _rigidbody2d.velocity = -direction * stats.speed * Time.deltaTime * 100;
+
+            if (direction.x < 0)
                 transform.localScale = new Vector3(-1f, 1f, 1f) * stats.size;
-            else if (_direction.x > 0)
+            else if (direction.x > 0)
                 transform.localScale = new Vector3(1f, 1f, 1f) * stats.size;
         }
 
         public override void Knockback()
         {
-            _rigidbody2d.velocity = _direction * stats.speed * Time.deltaTime * 300;
+            _rigidbody2d.velocity = direction * stats.speed * Time.deltaTime * 300;
         }
         public override void CalculateDirection()
         {
@@ -88,8 +88,8 @@ namespace SwordEnchant.Characters
                 return;
             }
 
-            _direction = (transform.position - Target.position).normalized;
-            _direction.z = 0f;
+            direction = (transform.position - Target.position).normalized;
+            direction.z = 0f;
         }
 
         public void TakeDamage(float damage, float criticalDamage, float criticalProb, GameObject hitEffectPrefabs, Vector3 hitPoint)

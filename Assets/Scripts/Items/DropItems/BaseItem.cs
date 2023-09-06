@@ -51,7 +51,7 @@ namespace SwordEnchant.Item
                 // Destroy
                 Poolable poolable = GetComponent<Poolable>();
                 
-                if (PoolManager.Instance.isContain(gameObject) && poolable != null)
+                if (PoolManager.Instance.IsContain(gameObject) && poolable != null)
                     PoolManager.Instance.Push(poolable); 
                 else
                     Destroy(gameObject); // 풀에 등록되지 않으면

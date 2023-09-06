@@ -7,21 +7,22 @@ namespace SwordEnchant.Core
 {
     public class MoveState : State<EnemyController>
     {
-        #region Variables
-        private CharacterController controller;
-        #endregion Variables
 
         #region Override Methods
         public override void OnInitialized()
         {
-            controller = context.GetComponent<CharacterController>();
+
         }
 
         public override void OnEnter()
         {
             context.FindPlayer();
             context.CalculateDirection();
-            
+
+            if (context.Direction.x < 0)
+                context.transform.localScale = new Vector3(-1f, 1f, 1f) * context.Stats.size;
+            else if (context.Direction.x > 0)
+                context.transform.localScale = new Vector3(1f, 1f, 1f) * context.Stats.size;
         }
 
         public override void OnExit()

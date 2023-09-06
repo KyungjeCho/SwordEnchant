@@ -40,7 +40,7 @@ namespace SwordEnchant.WeaponSystem
         {
             if (state == ChestOpenState.READY)
             {
-                if (Input.GetMouseButton(0) /*|| Input.GetTouch(0).phase == TouchPhase.Began*/)
+                if (Input.GetMouseButton(0))
                 {
                     if (db == null || inventory == null)
                         return;

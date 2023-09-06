@@ -203,6 +203,22 @@ namespace SwordEnchant.Managers
             StopAllCoroutines();
         }
         #endregion Game Over Panel
+
+        #region Game Clear Panel
+        [Header("--- Game Clear Panel ---")]
+        public GameObject GameClearPanelObj;
+        public Button ReturnToLobbyBtn2;
+
+        public void OpenGameClearPanel()
+        {
+            if (GameClearPanelObj != null)
+                GameClearPanelObj.SetActive(true);
+
+            GameManager.Instance.joystick.gameObject.SetActive(false);
+            StopAllCoroutines();
+        }
+        #endregion Game Clear Panel
+
         #region Timer 
         [Header("--- Timer ---")]
         public TMP_Text timerText;
@@ -301,6 +317,8 @@ namespace SwordEnchant.Managers
 
             if (ReturnToLobbyBtn != null)
                 ReturnToLobbyBtn.onClick.AddListener(ReturnToLobby);
+            if (ReturnToLobbyBtn2 != null)
+                ReturnToLobbyBtn2.onClick.AddListener(ReturnToLobby);
 
             if (EnhanceReturnBtn != null)
                 EnhanceReturnBtn.onClick.AddListener(CloseEnhancePanel);

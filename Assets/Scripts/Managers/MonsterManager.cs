@@ -24,6 +24,9 @@ namespace SwordEnchant.Managers
         public int spawnCount = 1;
 
 
+        private float directionTimer = 0.0f;
+        public float directionDur = 5f;
+
         public List<TimeDuration> timeToDur = new List<TimeDuration>();
         public List<int> timeList;
 
@@ -109,6 +112,13 @@ namespace SwordEnchant.Managers
 
                 timer = 0f;
             }
+
+            directionTimer += Time.deltaTime;
+            if (directionTimer >= directionDur)
+            {
+                OneDirectionMonsterSpawn();
+                directionTimer = 0f;
+            }
         }
 
         public void MonsterSpawn()
@@ -125,6 +135,23 @@ namespace SwordEnchant.Managers
             po.transform.position = MathHelper.DegreeToVector3(degree, r) + playerTr.position;
         }
 
+        public void OneDirectionMonsterSpawn()
+        {
+            float degree = Random.Range(0f, 360f);
+
+            float r = 10f;
+
+            Vector2 startPos = MathHelper.DegreeToVector3(degree, r) + playerTr.position;
+
+            int index = Random.Range(0, directionMonsterPrefabs.Count);
+
+            for(int i = 0; i < 5; i++)
+            {
+                Poolable po = PoolManager.Instance.Pop(directionMonsterPrefabs[index]);
+                po.transform.position = startPos + Random.insideUnitCircle;
+            }
+            
+        }
         #region Time Events
         public void Time0min()
         {

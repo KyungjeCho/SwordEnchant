@@ -40,17 +40,18 @@ namespace SwordEnchant.Characters
         protected DamageFlash damageFlash;
 
         protected StateMachine<EnemyController> stateMachine;
-        // Todo: Monster animation 구현
-        //protected Animator animator; 
-        private Transform _target = null;
-        public Transform Target => _target;
+
+        private Transform target = null;
+        public Transform Target => target;
 
         public MonsterList data;
 
         protected MonsterStats stats;
 
-        protected Vector3 _direction = Vector3.zero;
-        public Vector3 Direction => _direction;
+        public MonsterStats Stats => stats;
+
+        protected Vector3 direction = Vector3.zero;
+        public Vector3 Direction => direction;
 
         public List<DropItem> dropItems = new List<DropItem>();
 
@@ -68,8 +69,6 @@ namespace SwordEnchant.Characters
 
         protected virtual void Update()
         {
-            //stateMachine.Update(Time.deltaTime);
-
             if (stats.health <= 0f)
             {
                 Kill();
@@ -97,15 +96,15 @@ namespace SwordEnchant.Characters
         #region Helper Methods
         public void FindPlayer()
         {
-            GameObject go = GameManager.Instance.playerTr.gameObject;
-            if (go == null)
+            Transform playerTr = GameManager.Instance.playerTr;
+            if (playerTr == null)
             {
                 Debug.LogWarning("Player 게임 오브젝트를 현재 씬에서 찾을 수 없습니다");
                 return;
             }
             else 
             {
-                _target = go.transform;
+                target = playerTr;
             }
         }
 

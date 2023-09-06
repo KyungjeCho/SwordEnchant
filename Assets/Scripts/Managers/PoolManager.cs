@@ -30,18 +30,13 @@ namespace SwordEnchant.Managers
         {
             Pool pool = new Pool();
             pool.Init(original, poolSize);
-            pool.Root.parent = this.root;
+            pool.root.parent = this.root;
 
             this.pool.Add(original.name, pool);
         }
 
         public void Push(Poolable poolable)
         {
-            //if (poolable == null)
-            //{
-            //    //Debug.LogError(poolable);
-            //    return;
-            //}
             string name = poolable.gameObject.name;
 
             if (pool.ContainsKey(name) == false)
@@ -55,9 +50,6 @@ namespace SwordEnchant.Managers
 
         public Poolable Pop(GameObject original, Transform parent = null)
         {
-            //if (original == null)
-            //    return null;
-
             if (pool.ContainsKey(original.name) == false)
             {
                 CreatePool(original);
@@ -66,11 +58,11 @@ namespace SwordEnchant.Managers
             return pool[original.name].Pop(parent);
         }
 
-        public bool isContain(GameObject original)
+        public bool IsContain(GameObject original)
         {
             return pool.ContainsKey(original.name);
         }
-        public bool isContain(string originalName)
+        public bool IsContain(string originalName)
         {
             return pool.ContainsKey(originalName);
         }
@@ -82,7 +74,7 @@ namespace SwordEnchant.Managers
                 return null;
             }
 
-            return pool[name].Original;
+            return pool[name].original;
         }
 
         public void Clear()

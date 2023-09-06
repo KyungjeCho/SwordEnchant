@@ -11,6 +11,7 @@ public class BackgroundController : MonoBehaviour
 
     private Transform playerTr;
     #endregion Variables
+
     private void Start()
     {
         playerTr = GameManager.Instance.playerTr;
@@ -30,38 +31,4 @@ public class BackgroundController : MonoBehaviour
         if (duration < diffY)
             transform.Translate(Vector3.up * dirY * 52);
     }
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (!collision.CompareTag("Area"))
-    //        return;
-
-    //    Vector3 playerPos = GameManager.Instance.playerTr.position;
-    //    Vector3 myPos = transform.position;
-
-    //    float diffX = Mathf.Abs(playerPos.x - myPos.x);
-    //    float diffY = Mathf.Abs(playerPos.y - myPos.y);
-
-    //    Vector3 playerDir = GameManager.Instance.playerTr.GetComponent<BehaviourController>().GetDir;
-    //    float dirX = playerDir.x < 0 ? -1 : 1;
-    //    float dirY = playerDir.y < 0 ? -1 : 1;
-        
-
-    //    switch (transform.tag)
-    //    {
-    //        case "Ground":
-    //            if (diffX > diffY)
-    //            {
-    //                transform.Translate(Vector3.right * dirX * 44);
-    //            }
-    //            else if (diffX < diffY)
-    //            {
-    //                transform.Translate(Vector3.up * dirY * 44);
-    //            }
-    //            break;
-
-    //        case "Enemy":
-
-    //            break;
-    //    }
-    //}
 }

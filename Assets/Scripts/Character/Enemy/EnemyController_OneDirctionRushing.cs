@@ -11,10 +11,10 @@ namespace SwordEnchant.Characters
     public class EnemyController_OneDirctionRushing : EnemyController, IDamagable
     {
         #region Variables
-        private Rigidbody2D             _rigidbody2D;
+        private Rigidbody2D             myRigidbody2D;
 
         [SerializeField]
-        private float                   _elapsedTime = 0f;
+        private float                   elapsedTime = 0f;
         public float                    attackCooldown = 1f;
         public SoundList                soundIndex;
 
@@ -29,8 +29,8 @@ namespace SwordEnchant.Characters
             
             stateMachine.AddState(new MoveState());
 
-            _rigidbody2D     = GetComponent<Rigidbody2D>();
-            _elapsedTime    = attackCooldown; // 시작하자마자 쿨타임 채우기
+            myRigidbody2D = GetComponent<Rigidbody2D>();
+            elapsedTime = attackCooldown; // 시작하자마자 쿨타임 채우기
         }
         protected override void Update()
         {
@@ -41,15 +41,14 @@ namespace SwordEnchant.Characters
         {
             base.FixedUpdate();
 
-            _elapsedTime += Time.fixedDeltaTime;
-            if (_elapsedTime > attackCooldown)
-                _elapsedTime = attackCooldown;
+            elapsedTime += Time.fixedDeltaTime;
+            if (elapsedTime > attackCooldown)
+                elapsedTime = attackCooldown;
         }
 
         protected virtual void OnCollisionStay2D(Collision2D other)
         {
-            Debug.Log("충돌 처리 전 ");
-            if (_elapsedTime < attackCooldown)
+            if (elapsedTime < attackCooldown)
             {
                 return;
             }
@@ -61,7 +60,7 @@ namespace SwordEnchant.Characters
                 if (damagable != null)
                 {
                     damagable.TakeDamage(stats.damage, 0f, 0f, null, Vector3.zero);
-                    _elapsedTime = 0f;
+                    elapsedTime = 0f;
                 }
             }
         }
@@ -71,7 +70,7 @@ namespace SwordEnchant.Characters
         #region Moveable Interface
         public override void Move()
         {
-            _rigidbody2D.velocity = -_direction * stats.speed * Time.deltaTime * 100; 
+            myRigidbody2D.velocity = -direction * stats.speed * Time.deltaTime; 
         }
 
         #endregion Moveable Interface
@@ -84,17 +83,19 @@ namespace SwordEnchant.Characters
                 return;
             }
 
-            _direction = (transform.position - Target.position).normalized;
-            _direction.z = 0f;
+            direction = (transform.position - Target.position).normalized;
+            direction.z = 0f;
         }
 
         public void TakeDamage(float damage, float criticalDamage, float criticalProb, GameObject hitEffectPrefabs, Vector3 hitPoint)
         {
-            float totalDamage = Formula.TotalDamage(damage, criticalDamage, stats.defence, Formula.IsCritical(criticalProb));
+            float totalDamage = Formula.TotalDamage(damage, 1f, stats.defence, Formula.IsCritical(criticalProb));
             stats.health -= totalDamage;
 
             SoundManager.Instance.PlayEffectSound(DataManager.SoundData().soundClips[(int)soundIndex]);
             UIManager.Instance.CreateDamageText(transform.position, -(int)totalDamage);
+
+            EffectManager.Instance.EffectOneShot((int)EffectList.HitEffect, hitPoint);
 
             damageFlash.CallDamageFlash();
         }

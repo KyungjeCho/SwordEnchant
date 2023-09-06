@@ -45,12 +45,12 @@ namespace SwordEnchant.Core
     public sealed class StateMachine<T>
     {
         #region Variables
-        private T _context;
-        private State<T> _currentState;
-        public State<T> CurrentState => _currentState;
+        private T context;
+        private State<T> currentState;
+        public State<T> CurrentState => currentState;
 
-        private float _elapsedTimeInState = 0.0f;
-        public float ElapsedTimeInState => _elapsedTimeInState;
+        private float elapsedTimeInState = 0.0f;
+        public float ElapsedTimeInState => elapsedTimeInState;
 
         private Dictionary<System.Type, State<T>> states = new Dictionary<System.Type, State<T>>();
         #endregion Variables
@@ -58,46 +58,46 @@ namespace SwordEnchant.Core
         #region Constructor
         public StateMachine(T context, State<T> initialState)
         {
-            this._context = context;
+            this.context = context;
 
             AddState(initialState);
-            _currentState = initialState;
-            _currentState.OnEnter();
+            currentState = initialState;
+            currentState.OnEnter();
         }
         #endregion Constructor
 
         #region StateMachine Methods
         public void AddState(State<T> state)
         {
-            state.SetStateMachineAndContext(this, _context);
+            state.SetStateMachineAndContext(this, context);
             states[state.GetType()] = state;
         }
 
         public void Update(float deltaTime)
         {
-            _elapsedTimeInState += deltaTime;
+            elapsedTimeInState += deltaTime;
 
-            _currentState.Update(deltaTime);
+            currentState.Update(deltaTime);
         }
 
         public R ChangeState<R>() where R : State<T>
         {
             var newType = typeof(R);
-            if (_currentState.GetType() == newType)
+            if (currentState.GetType() == newType)
             {
-                return _currentState as R;
+                return currentState as R;
             }
 
-            if (_currentState != null)
+            if (currentState != null)
             {
-                _currentState.OnExit();
+                currentState.OnExit();
             }
 
-            _currentState = states[newType];
-            _currentState.OnEnter();
-            _elapsedTimeInState = 0.0f;
+            currentState = states[newType];
+            currentState.OnEnter();
+            elapsedTimeInState = 0.0f;
             
-            return _currentState as R;
+            return currentState as R;
         }
         #endregion StateMachine Methods
     }

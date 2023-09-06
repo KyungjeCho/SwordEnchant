@@ -16,7 +16,6 @@ namespace SwordEnchant.Characters
         #endregion Variables
         #region Caching
         private Rigidbody2D myRigidbody2D;
-        private Transform myTransform;
         #endregion Caching
         #region Properties
         private float h;
@@ -38,7 +37,6 @@ namespace SwordEnchant.Characters
             behaviours = new List<GenericBehaviour>();
             overrideBehaviours = new List<GenericBehaviour>();
             myRigidbody2D = GetComponent<Rigidbody2D>();
-            myTransform = transform;
         }
         private void Update()
         {
@@ -115,17 +113,21 @@ namespace SwordEnchant.Characters
         }
         #endregion Unity Methods
         #region Behaviour Methods
+        
+        // Behaviour 등록
         public void SubScribeBehaviour(GenericBehaviour behaviour)
         {
             behaviours.Add(behaviour);
         }
 
+        // 기본 Behaviour Code를 등록
         public void RegisterDefaultBehaviour(int behaviourCode)
         {
             defaultBehaviour = behaviourCode;
             currentBehaviour = behaviourCode;
         }
 
+        // 현재 Behaviour가 기본 Behaviour 일 경우 Code 등록
         public void RegisterBehaviour(int behaviourCode)
         {
             if (currentBehaviour == defaultBehaviour)
@@ -134,6 +136,7 @@ namespace SwordEnchant.Characters
             }
         }
 
+        // 현재 Behaviour Code 취소
         public void UnRegisterBehaviour(int behaviourCode)
         {
             if (currentBehaviour == behaviourCode)
@@ -225,30 +228,30 @@ namespace SwordEnchant.Characters
         {
             return Mathf.Abs(v) > Mathf.Epsilon;
         }
-#endregion Check Methods
+        #endregion Check Methods
     }
 
     public abstract class GenericBehaviour : MonoBehaviour
     {
-#region Variables
+        #region Variables
         protected BehaviourController behaviourController;
         protected int behaviourCode;
-#endregion Variables
-#region Unity Methods
+        #endregion Variables
+        #region Unity Methods
         private void Awake()
         {
             behaviourController = GetComponent<BehaviourController>();
 
             behaviourCode = GetType().GetHashCode();
         }
-#endregion Unity Methods
-#region Properties
+        #endregion Unity Methods
+        #region Properties
         public int GetBehaviourCode
         {
             get => behaviourCode;
         }
-#endregion Properties
-#region Virtual Methods
+        #endregion Properties
+        #region Virtual Methods
         public virtual void LocalLateUpdate()
         {
 
@@ -263,6 +266,6 @@ namespace SwordEnchant.Characters
         {
 
         }
-#endregion Virtual Methods
+        #endregion Virtual Methods
     }
 }
